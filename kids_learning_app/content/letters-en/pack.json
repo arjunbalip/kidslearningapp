@@ -1,0 +1,193 @@
+{
+  "id": "letters-en",
+  "version": 1,
+  "type": "letters",
+  "language": "en",
+  "title": "Letters",
+  "activities": [
+    "learn_cards"
+  ],
+  "items": [
+    {
+      "id": "a",
+      "upper": "A",
+      "lower": "a",
+      "word": "Apple",
+      "image": "images/apple.png"
+    },
+    {
+      "id": "b",
+      "upper": "B",
+      "lower": "b",
+      "word": "Ball",
+      "image": "images/ball.png"
+    },
+    {
+      "id": "c",
+      "upper": "C",
+      "lower": "c",
+      "word": "Cat",
+      "image": "images/cat.png"
+    },
+    {
+      "id": "d",
+      "upper": "D",
+      "lower": "d",
+      "word": "Dog",
+      "image": "images/dog.png"
+    },
+    {
+      "id": "e",
+      "upper": "E",
+      "lower": "e",
+      "word": "Elephant",
+      "image": "images/elephant.png"
+    },
+    {
+      "id": "f",
+      "upper": "F",
+      "lower": "f",
+      "word": "Fish",
+      "image": "images/fish.png"
+    },
+    {
+      "id": "g",
+      "upper": "G",
+      "lower": "g",
+      "word": "Grapes",
+      "image": "images/grapes.png"
+    },
+    {
+      "id": "h",
+      "upper": "H",
+      "lower": "h",
+      "word": "House",
+      "image": "images/house.png"
+    },
+    {
+      "id": "i",
+      "upper": "I",
+      "lower": "i",
+      "word": "Ice cream",
+      "image": "images/ice_cream.png"
+    },
+    {
+      "id": "j",
+      "upper": "J",
+      "lower": "j",
+      "word": "Jar",
+      "image": "images/jar.png"
+    },
+    {
+      "id": "k",
+      "upper": "K",
+      "lower": "k",
+      "word": "Kite",
+      "image": "images/kite.png"
+    },
+    {
+      "id": "l",
+      "upper": "L",
+      "lower": "l",
+      "word": "Lion",
+      "image": "images/lion.png"
+    },
+    {
+      "id": "m",
+      "upper": "M",
+      "lower": "m",
+      "word": "Monkey",
+      "image": "images/monkey.png"
+    },
+    {
+      "id": "n",
+      "upper": "N",
+      "lower": "n",
+      "word": "Nest",
+      "image": "images/nest.png"
+    },
+    {
+      "id": "o",
+      "upper": "O",
+      "lower": "o",
+      "word": "Orange",
+      "image": "images/orange.png"
+    },
+    {
+      "id": "p",
+      "upper": "P",
+      "lower": "p",
+      "word": "Parrot",
+      "image": "images/parrot.png"
+    },
+    {
+      "id": "q",
+      "upper": "Q",
+      "lower": "q",
+      "word": "Queen",
+      "image": "images/queen.png"
+    },
+    {
+      "id": "r",
+      "upper": "R",
+      "lower": "r",
+      "word": "Rabbit",
+      "image": "images/rabbit.png"
+    },
+    {
+      "id": "s",
+      "upper": "S",
+      "lower": "s",
+      "word": "Sun",
+      "image": "images/sun.png"
+    },
+    {
+      "id": "t",
+      "upper": "T",
+      "lower": "t",
+      "word": "Tiger",
+      "image": "images/tiger.png"
+    },
+    {
+      "id": "u",
+      "upper": "U",
+      "lower": "u",
+      "word": "Umbrella",
+      "image": "images/umbrella.png"
+    },
+    {
+      "id": "v",
+      "upper": "V",
+      "lower": "v",
+      "word": "Violin",
+      "image": "images/violin.png"
+    },
+    {
+      "id": "w",
+      "upper": "W",
+      "lower": "w",
+      "word": "Watch",
+      "image": "images/watch.png"
+    },
+    {
+      "id": "x",
+      "upper": "X",
+      "lower": "x",
+      "word": "Xylophone"
+    },
+    {
+      "id": "y",
+      "upper": "Y",
+      "lower": "y",
+      "word": "Yo-yo",
+      "image": "images/yoyo.png"
+    },
+    {
+      "id": "z",
+      "upper": "Z",
+      "lower": "z",
+      "word": "Zebra",
+      "image": "images/zebra.png"
+    }
+  ]
+}

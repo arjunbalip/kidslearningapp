@@ -1,0 +1,82 @@
+{
+  "id": "numbers-en",
+  "version": 1,
+  "type": "numbers",
+  "language": "en",
+  "title": "Numbers",
+  "activities": [
+    "learn_cards"
+  ],
+  "items": [
+    {
+      "id": "1",
+      "number": 1,
+      "word": "One",
+      "label": "One moon!",
+      "image": "images/moon.png"
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "word": "Two",
+      "label": "Two ducks!",
+      "image": "images/duck.png"
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "word": "Three",
+      "label": "Three balls!",
+      "image": "images/ball.png"
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "word": "Four",
+      "label": "Four fish!",
+      "image": "images/fish.png"
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "word": "Five",
+      "label": "Five stars!",
+      "image": "images/star.png"
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "word": "Six",
+      "label": "Six strawberries!",
+      "image": "images/strawberry.png"
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "word": "Seven",
+      "label": "Seven butterflies!",
+      "image": "images/butterfly.png"
+    },
+    {
+      "id": "8",
+      "number": 8,
+      "word": "Eight",
+      "label": "Eight ladybugs!",
+      "image": "images/ladybug.png"
+    },
+    {
+      "id": "9",
+      "number": 9,
+      "word": "Nine",
+      "label": "Nine balloons!",
+      "image": "images/balloon.png"
+    },
+    {
+      "id": "10",
+      "number": 10,
+      "word": "Ten",
+      "label": "Ten flowers!",
+      "image": "images/flower.png"
+    }
+  ]
+}
