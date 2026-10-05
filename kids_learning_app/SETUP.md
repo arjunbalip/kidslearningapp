@@ -33,7 +33,7 @@ If Flutter asks you to turn on **Developer Mode** for symlinks, run `start ms-se
 In a terminal:
 
 ```
-cd C:\AIApps\kids_learning_app
+cd C:\AIApps\ChildreaApp\kidslearningapp\kids_learning_app
 
 git init
 git add .
@@ -50,7 +50,7 @@ flutter run -d chrome
 
 ## 4. Run from VS Code
 
-1. *File > Open Folder* and choose `C:\AIApps\kids_learning_app`.
+1. *File > Open Folder* and choose `C:\AIApps\ChildreaApp\kidslearningapp\kids_learning_app`.
 2. Bottom-right of VS Code, pick a device: **Chrome** or your **Android emulator**.
 3. Press **F5**. While it runs, save a file and the app updates instantly (hot reload).
 
@@ -58,21 +58,20 @@ flutter run -d chrome
 
 The app no longer has pictures built in: they arrive in downloaded packs.
 
-1. **Delete two old folders** that milestone 2 no longer uses: `assets\dev_content` and `lib\content`.
-2. In a terminal in the project folder, get the new packages:
+1. In a terminal in the project folder, get the new packages:
    ```
    flutter pub get
    ```
-3. Build the packs (makes `server\manifest.json` and `server\packs\*.zip`):
+2. Build the packs (makes `server\manifest.json` and `server\packs\*.zip`):
    ```
    dart run tools/pack_builder.dart
    ```
-4. Start the local pack server in a **second terminal** and leave it running:
+3. Start the local pack server in a **second terminal** and leave it running:
    ```
    dart run tools/dev_server.dart
    ```
    Check it works: open http://localhost:8080/manifest.json in Chrome.
-5. Run the app (F5). Then:
+4. Run the app (F5). Then:
    - Tap **Letters**: Pip says "Ask a grown-up to download this!"
    - Tap the **gear**, answer the sum, then **Download** Letters and Numbers.
    - Go back: both worlds now open with pictures.

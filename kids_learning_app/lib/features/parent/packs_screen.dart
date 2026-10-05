@@ -92,7 +92,7 @@ class _PacksScreenState extends State<PacksScreen> {
                         ],
                         if (_packs.manifestStatus == ManifestStatus.loaded &&
                             _packs.visiblePackIds.isEmpty)
-                          _Banner(
+                          const _Banner(
                             icon: Icons.inbox_outlined,
                             text: 'The server has no packs yet.',
                           ),
@@ -123,7 +123,7 @@ class _PacksScreenState extends State<PacksScreen> {
       ));
     }
     if (_packs.manifestStatus == ManifestStatus.offline) {
-      widgets.add(_Banner(
+      widgets.add(const _Banner(
         icon: Icons.wifi_off_rounded,
         text: 'Can\'t reach the pack server. Downloaded packs still work.',
       ));

@@ -5,6 +5,7 @@ Free, ad-free, offline learning app for toddlers (2 to 5): English letters A to 
 ## The owner
 
 - Experienced in C#, WPF and .NET MAUI; new to Flutter. Explain Flutter ideas in C#/MAUI terms when useful.
+- Project folder: `C:\AIApps\ChildreaApp\kidslearningapp\kids_learning_app` (the old `C:\AIApps\kids_learning_app` copy is no longer used). Flutter SDK: `C:\src\flutter`.
 - Runs the app from VS Code on Windows. End every change with one line saying what to do: hot reload, hot restart, or stop + `flutter pub get` + run.
 - Prefers planning and design before code; keep the planning documents in step with decisions.
 
