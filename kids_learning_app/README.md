@@ -9,7 +9,7 @@ New here? Start with **SETUP.md**.
 | Milestone | What | State |
 | --- | --- | --- |
 | 1 | App shell: Home, Letters and Numbers worlds, learn cards, Reward, parent gate | Done |
-| 2 | Responsive layouts; pack system: manifest, download, verify, unzip, offline storage (phone and web); pack builder and dev server | Ready to test |
+| 2 | Responsive layouts; pack system: manifest, download, verify, unzip, offline storage (phone and web); pack builder and dev server | Done |
 | 3 | Audio: voice clips, sound effects, replay button | Next |
 | 4 | Tracing engine for capital and small letters and numbers | Planned |
 | 5 | Saved progress, Pip animations, polish, Play Store release | Planned |
@@ -31,7 +31,7 @@ content/
   numbers-en/               pack.json + pictures for the Numbers pack
 tools/
   pack_builder.dart         builds server/manifest.json and server/packs/*.zip
-  dev_server.dart           serves server/ on http://localhost:8080 for testing
+  dev_server.dart           serves server/ on http://localhost:8787 for testing
 assets/
   fonts/                    Baloo 2 (variable font)
   images/pip.svg            Pip the owl (concept)

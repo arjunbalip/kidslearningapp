@@ -70,7 +70,7 @@ The app no longer has pictures built in: they arrive in downloaded packs.
    ```
    dart run tools/dev_server.dart
    ```
-   Check it works: open http://localhost:8080/manifest.json in Chrome.
+   Check it works: open http://localhost:8787/manifest.json in Chrome.
 4. Run the app (F5). Then:
    - Tap **Letters**: Pip says "Ask a grown-up to download this!"
    - Tap the **gear**, answer the sum, then **Download** Letters and Numbers.
@@ -78,9 +78,9 @@ The app no longer has pictures built in: they arrive in downloaded packs.
    - Refresh the browser or restart the app: the packs are still there.
    - Stop the pack server (Ctrl+C): everything still works offline.
 
-**Android emulator:** works with the same server (the app uses `10.0.2.2:8080`, the emulator's name for your PC).
-**Real phone on your Wi-Fi:** find your PC's IP with `ipconfig`, allow port 8080 in Windows Firewall when asked, and run
-`flutter run --dart-define=PACK_SERVER=http://YOUR-PC-IP:8080`.
+**Android emulator:** works with the same server (the app uses `10.0.2.2:8787`, the emulator's name for your PC).
+**Real phone on your Wi-Fi:** find your PC's IP with `ipconfig`, allow port 8787 in Windows Firewall when asked, and run
+`flutter run --dart-define=PACK_SERVER=http://YOUR-PC-IP:8787`.
 
 ## 6. What to try in milestone 1
 

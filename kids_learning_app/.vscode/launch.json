@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Kids Learning App",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      // A fixed port keeps the same browser storage (downloaded packs) between runs.
+      "args": ["--web-port=5555"]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 // tools/pack_builder.dart, with the CORS header the web version needs.
 //
 // Run from the project folder and leave it running:
-//   dart run tools/dev_server.dart          (port 8080)
+//   dart run tools/dev_server.dart          (port 8787)
 //   dart run tools/dev_server.dart 9000     (another port)
 //
 // The real server later is IIS on your Windows Server (see Technical Design).
@@ -10,7 +10,7 @@
 import 'dart:io';
 
 Future<void> main(List<String> args) async {
-  final port = args.isNotEmpty ? int.parse(args.first) : 8080;
+  final port = args.isNotEmpty ? int.parse(args.first) : 8787;
   final root = Directory('server');
   if (!root.existsSync()) {
     stderr.writeln('server/ not found. First run: dart run tools/pack_builder.dart');
