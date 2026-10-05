@@ -97,26 +97,19 @@ class WorldScreen extends StatelessWidget {
           ),
         ),
       ),
-      MetroTileSpec(
-        w: 2,
-        h: 2,
-        child: MetroTile(
-          color: _deepColor,
-          label: 'Trace',
-          onTap: () => context.go('/$_type/trace/0'),
-          child: FittedBox(
-            child: Text(
-              _isLetters ? 'A' : '1',
-              style: baloo(150, weight: 800, height: 1).copyWith(
-                foreground: Paint()
-                  ..style = PaintingStyle.stroke
-                  ..strokeWidth = 6
-                  ..color = Colors.white,
-              ),
-            ),
-          ),
-        ),
+      _traceTile(
+        context,
+        label: _isLetters ? 'Trace ABC' : 'Trace',
+        sample: _isLetters ? 'A' : '1',
+        route: '/$_type/trace/0',
       ),
+      if (_isLetters)
+        _traceTile(
+          context,
+          label: 'Trace abc',
+          sample: 'a',
+          route: '/letters/trace-small/0',
+        ),
       if (_isLetters)
         MetroTileSpec(
           w: cols,
@@ -129,6 +122,35 @@ class WorldScreen extends StatelessWidget {
           ),
         ),
     ];
+  }
+
+  /// A tile with an outlined sample letter, like a shape waiting to be traced.
+  MetroTileSpec _traceTile(
+    BuildContext context, {
+    required String label,
+    required String sample,
+    required String route,
+  }) {
+    return MetroTileSpec(
+      w: 2,
+      h: 2,
+      child: MetroTile(
+        color: _deepColor,
+        label: label,
+        onTap: () => context.go(route),
+        child: FittedBox(
+          child: Text(
+            sample,
+            style: baloo(150, weight: 800, height: 1).copyWith(
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

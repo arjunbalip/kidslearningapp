@@ -56,6 +56,7 @@ class PackItem {
     this.label,
     this.image,
     this.audio = const {},
+    this.trace = const {},
   });
 
   final String id;
@@ -73,6 +74,12 @@ class PackItem {
   final String? image; // path inside the pack, e.g. "images/apple.png"
   final Map<String, String> audio; // e.g. {"name": "audio/letter_a_name.mp3"}
 
+  /// Tracing strokes, in writing order, as SVG path strings (one contour
+  /// each). Keys: "upper" and "lower" for letters, "number" for numbers.
+  /// Coordinates: top line y=0, middle line y=50, base line y=100,
+  /// tail line y=150 (capitals and numbers use 0 to 100).
+  final Map<String, List<String>> trace;
+
   factory PackItem.fromJson(Map<String, dynamic> j) => PackItem(
         id: '${j['id']}',
         upper: j['upper'] as String?,
@@ -84,6 +91,10 @@ class PackItem {
         audio: {
           for (final e in ((j['audio'] as Map<String, dynamic>?) ?? const {}).entries)
             e.key: '${e.value}',
+        },
+        trace: {
+          for (final e in ((j['trace'] as Map<String, dynamic>?) ?? const {}).entries)
+            e.key: [for (final s in (e.value as List<dynamic>)) '$s'],
         },
       );
 }

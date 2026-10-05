@@ -6,7 +6,8 @@
 //
 // For each content/<pack>/ folder with a pack.json it:
 //   1. checks pack.json (id, version, type, items) and that every picture
-//      and audio file it names exists,
+//      and audio file it names exists, and (for packs with "tracing")
+//      that every item has valid strokes,
 //   2. zips the folder as server/packs/<id>-v<version>.zip,
 //   3. records size and SHA-256 in server/manifest.json.
 //
@@ -18,6 +19,7 @@ import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:crypto/crypto.dart';
+import 'package:path_parsing/path_parsing.dart';
 
 const defaultMinAppVersion = '0.2.0';
 
@@ -121,6 +123,10 @@ List<String> _check(Map<String, dynamic> pack, Directory dir) {
     return problems;
   }
 
+  final activities = pack['activities'];
+  final tracing = activities is List && activities.contains('tracing');
+  final traceKeys = type == 'numbers' ? ['number'] : ['upper', 'lower'];
+
   for (final raw in items) {
     if (raw is! Map<String, dynamic>) {
       problems.add('An item is not an object.');
@@ -138,6 +144,49 @@ List<String> _check(Map<String, dynamic> pack, Directory dir) {
         problems.add('item "${raw['id']}": file not found: $r');
       }
     }
+    if (tracing) problems.addAll(_checkTrace(raw, traceKeys));
   }
   return problems;
+}
+
+/// Each stroke must be an SVG path string with exactly one starting point.
+List<String> _checkTrace(Map<String, dynamic> item, List<String> keys) {
+  final problems = <String>[];
+  final trace = item['trace'];
+  for (final key in keys) {
+    final strokes = trace is Map ? trace[key] : null;
+    if (strokes is! List || strokes.isEmpty) {
+      problems.add('item "${item['id']}": no trace strokes for "$key".');
+      continue;
+    }
+    for (final s in strokes) {
+      final counter = _MoveCounter();
+      try {
+        writeSvgPathDataToPath('$s', counter);
+      } catch (_) {
+        problems.add('item "${item['id']}" $key: bad stroke "$s".');
+        continue;
+      }
+      if (counter.moves != 1) {
+        problems.add('item "${item['id']}" $key: stroke must start with one M: "$s".');
+      }
+    }
+  }
+  return problems;
+}
+
+class _MoveCounter extends PathProxy {
+  int moves = 0;
+
+  @override
+  void moveTo(double x, double y) => moves++;
+
+  @override
+  void lineTo(double x, double y) {}
+
+  @override
+  void cubicTo(double x1, double y1, double x2, double y2, double x3, double y3) {}
+
+  @override
+  void close() {}
 }

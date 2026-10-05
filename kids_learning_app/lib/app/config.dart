@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 /// App version, compared with each pack's `minAppVersion`.
 /// Keep in step with `version:` in pubspec.yaml.
-const String kAppVersion = '0.2.0';
+const String kAppVersion = '0.3.0';
 
 /// Where the pack server lives.
 ///

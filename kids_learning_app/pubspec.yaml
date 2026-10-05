@@ -2,7 +2,7 @@ name: kids_learning_app
 description: A free, offline learning app for toddlers (letters A to Z and numbers 1 to 10).
 publish_to: 'none'
 
-version: 0.2.0+2
+version: 0.3.0+3
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -20,6 +20,8 @@ dependencies:
   path_provider: ^2.1.2    # app's private folder on phones
   shared_preferences: ^2.2.2  # list of installed packs
   hive_ce: ^2.0.0         # pack files in the browser (IndexedDB) on web
+  # Milestone 4: tracing
+  path_parsing: ^1.1.0     # stroke shapes in pack.json are SVG path strings
 
 dev_dependencies:
   flutter_test:

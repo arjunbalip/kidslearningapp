@@ -1,11 +1,12 @@
 {
   "id": "letters-en",
-  "version": 1,
+  "version": 2,
   "type": "letters",
   "language": "en",
   "title": "Letters",
   "activities": [
-    "learn_cards"
+    "learn_cards",
+    "tracing"
   ],
   "items": [
     {
@@ -13,181 +14,435 @@
       "upper": "A",
       "lower": "a",
       "word": "Apple",
-      "image": "images/apple.png"
+      "image": "images/apple.png",
+      "trace": {
+        "upper": [
+          "M 40 0 L 5 100",
+          "M 40 0 L 75 100",
+          "M 18 62 L 62 62"
+        ],
+        "lower": [
+          "M 55 60 A 25 25 0 1 0 55 90",
+          "M 60 50 L 60 100"
+        ]
+      }
     },
     {
       "id": "b",
       "upper": "B",
       "lower": "b",
       "word": "Ball",
-      "image": "images/ball.png"
+      "image": "images/ball.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 45 0 A 25 25 0 0 1 45 50 L 10 50",
+          "M 10 50 L 50 50 A 25 25 0 0 1 50 100 L 10 100"
+        ],
+        "lower": [
+          "M 10 0 L 10 100",
+          "M 10 62 A 25 25 0 1 1 10 88"
+        ]
+      }
     },
     {
       "id": "c",
       "upper": "C",
       "lower": "c",
       "word": "Cat",
-      "image": "images/cat.png"
+      "image": "images/cat.png",
+      "trace": {
+        "upper": [
+          "M 75 20 A 45 50 0 1 0 75 80"
+        ],
+        "lower": [
+          "M 58 60 A 25 25 0 1 0 58 90"
+        ]
+      }
     },
     {
       "id": "d",
       "upper": "D",
       "lower": "d",
       "word": "Dog",
-      "image": "images/dog.png"
+      "image": "images/dog.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 30 0 A 40 50 0 0 1 30 100 L 10 100"
+        ],
+        "lower": [
+          "M 55 60 A 25 25 0 1 0 55 90",
+          "M 60 0 L 60 100"
+        ]
+      }
     },
     {
       "id": "e",
       "upper": "E",
       "lower": "e",
       "word": "Elephant",
-      "image": "images/elephant.png"
+      "image": "images/elephant.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 65 0",
+          "M 10 50 L 55 50",
+          "M 10 100 L 65 100"
+        ],
+        "lower": [
+          "M 12 75 L 60 75 A 25 25 0 1 0 55 92"
+        ]
+      }
     },
     {
       "id": "f",
       "upper": "F",
       "lower": "f",
       "word": "Fish",
-      "image": "images/fish.png"
+      "image": "images/fish.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 65 0",
+          "M 10 50 L 55 50"
+        ],
+        "lower": [
+          "M 58 10 C 50 -2 25 -2 25 20 L 25 100",
+          "M 5 50 L 50 50"
+        ]
+      }
     },
     {
       "id": "g",
       "upper": "G",
       "lower": "g",
       "word": "Grapes",
-      "image": "images/grapes.png"
+      "image": "images/grapes.png",
+      "trace": {
+        "upper": [
+          "M 75 20 A 45 50 0 1 0 83 60",
+          "M 55 60 L 83 60"
+        ],
+        "lower": [
+          "M 55 60 A 25 25 0 1 0 55 90",
+          "M 60 50 L 60 130 A 24 20 0 0 1 12 130"
+        ]
+      }
     },
     {
       "id": "h",
       "upper": "H",
       "lower": "h",
       "word": "House",
-      "image": "images/house.png"
+      "image": "images/house.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 65 0 L 65 100",
+          "M 10 50 L 65 50"
+        ],
+        "lower": [
+          "M 10 0 L 10 100",
+          "M 10 72 A 24 22 0 0 1 58 72 L 58 100"
+        ]
+      }
     },
     {
       "id": "i",
       "upper": "I",
       "lower": "i",
       "word": "Ice cream",
-      "image": "images/ice_cream.png"
+      "image": "images/ice_cream.png",
+      "trace": {
+        "upper": [
+          "M 35 0 L 35 100",
+          "M 10 0 L 60 0",
+          "M 10 100 L 60 100"
+        ],
+        "lower": [
+          "M 30 50 L 30 100",
+          "M 30 26 L 30 27"
+        ]
+      }
     },
     {
       "id": "j",
       "upper": "J",
       "lower": "j",
       "word": "Jar",
-      "image": "images/jar.png"
+      "image": "images/jar.png",
+      "trace": {
+        "upper": [
+          "M 55 0 L 55 70 A 25 30 0 0 1 5 70"
+        ],
+        "lower": [
+          "M 40 50 L 40 130 A 20 20 0 0 1 0 130",
+          "M 40 26 L 40 27"
+        ]
+      }
     },
     {
       "id": "k",
       "upper": "K",
       "lower": "k",
       "word": "Kite",
-      "image": "images/kite.png"
+      "image": "images/kite.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 65 0 L 10 55",
+          "M 28 37 L 65 100"
+        ],
+        "lower": [
+          "M 10 0 L 10 100",
+          "M 55 50 L 12 76 L 58 100"
+        ]
+      }
     },
     {
       "id": "l",
       "upper": "L",
       "lower": "l",
       "word": "Lion",
-      "image": "images/lion.png"
+      "image": "images/lion.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100 L 60 100"
+        ],
+        "lower": [
+          "M 30 0 L 30 100"
+        ]
+      }
     },
     {
       "id": "m",
       "upper": "M",
       "lower": "m",
       "word": "Monkey",
-      "image": "images/monkey.png"
+      "image": "images/monkey.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 45 65 L 80 0 L 80 100"
+        ],
+        "lower": [
+          "M 10 50 L 10 100",
+          "M 10 70 A 18 20 0 0 1 46 70 L 46 100",
+          "M 46 70 A 18 20 0 0 1 82 70 L 82 100"
+        ]
+      }
     },
     {
       "id": "n",
       "upper": "N",
       "lower": "n",
       "word": "Nest",
-      "image": "images/nest.png"
+      "image": "images/nest.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 70 100 L 70 0"
+        ],
+        "lower": [
+          "M 10 50 L 10 100",
+          "M 10 72 A 24 22 0 0 1 58 72 L 58 100"
+        ]
+      }
     },
     {
       "id": "o",
       "upper": "O",
       "lower": "o",
       "word": "Orange",
-      "image": "images/orange.png"
+      "image": "images/orange.png",
+      "trace": {
+        "upper": [
+          "M 40 0 A 40 50 0 1 0 40 100 A 40 50 0 1 0 40 0"
+        ],
+        "lower": [
+          "M 35 50 A 25 25 0 1 0 35 100 A 25 25 0 1 0 35 50"
+        ]
+      }
     },
     {
       "id": "p",
       "upper": "P",
       "lower": "p",
       "word": "Parrot",
-      "image": "images/parrot.png"
+      "image": "images/parrot.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 40 0 A 27 27 0 0 1 40 54 L 10 54"
+        ],
+        "lower": [
+          "M 10 50 L 10 150",
+          "M 10 62 A 25 25 0 1 1 10 88"
+        ]
+      }
     },
     {
       "id": "q",
       "upper": "Q",
       "lower": "q",
       "word": "Queen",
-      "image": "images/queen.png"
+      "image": "images/queen.png",
+      "trace": {
+        "upper": [
+          "M 40 0 A 40 50 0 1 0 40 100 A 40 50 0 1 0 40 0",
+          "M 50 70 L 85 105"
+        ],
+        "lower": [
+          "M 55 60 A 25 25 0 1 0 55 90",
+          "M 60 50 L 60 150"
+        ]
+      }
     },
     {
       "id": "r",
       "upper": "R",
       "lower": "r",
       "word": "Rabbit",
-      "image": "images/rabbit.png"
+      "image": "images/rabbit.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 100",
+          "M 10 0 L 40 0 A 27 27 0 0 1 40 54 L 10 54",
+          "M 35 54 L 70 100"
+        ],
+        "lower": [
+          "M 10 50 L 10 100",
+          "M 10 72 C 15 52 40 45 55 56"
+        ]
+      }
     },
     {
       "id": "s",
       "upper": "S",
       "lower": "s",
       "word": "Sun",
-      "image": "images/sun.png"
+      "image": "images/sun.png",
+      "trace": {
+        "upper": [
+          "M 70 15 C 60 0 10 -2 10 25 C 10 50 70 45 70 75 C 70 103 15 105 5 85"
+        ],
+        "lower": [
+          "M 55 58 C 48 48 12 48 12 63 C 12 76 55 72 55 87 C 55 102 15 103 8 92"
+        ]
+      }
     },
     {
       "id": "t",
       "upper": "T",
       "lower": "t",
       "word": "Tiger",
-      "image": "images/tiger.png"
+      "image": "images/tiger.png",
+      "trace": {
+        "upper": [
+          "M 40 0 L 40 100",
+          "M 5 0 L 75 0"
+        ],
+        "lower": [
+          "M 30 10 L 30 100",
+          "M 10 45 L 52 45"
+        ]
+      }
     },
     {
       "id": "u",
       "upper": "U",
       "lower": "u",
       "word": "Umbrella",
-      "image": "images/umbrella.png"
+      "image": "images/umbrella.png",
+      "trace": {
+        "upper": [
+          "M 10 0 L 10 65 A 30 35 0 0 0 70 65 L 70 0"
+        ],
+        "lower": [
+          "M 10 50 L 10 78 A 23 22 0 0 0 56 78",
+          "M 56 50 L 56 100"
+        ]
+      }
     },
     {
       "id": "v",
       "upper": "V",
       "lower": "v",
       "word": "Violin",
-      "image": "images/violin.png"
+      "image": "images/violin.png",
+      "trace": {
+        "upper": [
+          "M 5 0 L 40 100 L 75 0"
+        ],
+        "lower": [
+          "M 5 50 L 32 100 L 60 50"
+        ]
+      }
     },
     {
       "id": "w",
       "upper": "W",
       "lower": "w",
       "word": "Watch",
-      "image": "images/watch.png"
+      "image": "images/watch.png",
+      "trace": {
+        "upper": [
+          "M 0 0 L 20 100 L 45 35 L 70 100 L 90 0"
+        ],
+        "lower": [
+          "M 0 50 L 18 100 L 38 62 L 58 100 L 76 50"
+        ]
+      }
     },
     {
       "id": "x",
       "upper": "X",
       "lower": "x",
-      "word": "Xylophone"
+      "word": "Xylophone",
+      "trace": {
+        "upper": [
+          "M 5 0 L 70 100",
+          "M 70 0 L 5 100"
+        ],
+        "lower": [
+          "M 8 50 L 56 100",
+          "M 56 50 L 8 100"
+        ]
+      }
     },
     {
       "id": "y",
       "upper": "Y",
       "lower": "y",
       "word": "Yo-yo",
-      "image": "images/yoyo.png"
+      "image": "images/yoyo.png",
+      "trace": {
+        "upper": [
+          "M 5 0 L 40 50",
+          "M 75 0 L 40 50 L 40 100"
+        ],
+        "lower": [
+          "M 8 50 L 40 100",
+          "M 60 50 L 20 150"
+        ]
+      }
     },
     {
       "id": "z",
       "upper": "Z",
       "lower": "z",
       "word": "Zebra",
-      "image": "images/zebra.png"
+      "image": "images/zebra.png",
+      "trace": {
+        "upper": [
+          "M 5 0 L 70 0 L 5 100 L 70 100"
+        ],
+        "lower": [
+          "M 8 50 L 56 50 L 8 100 L 56 100"
+        ]
+      }
     }
-  ]
+  ],
+  "minAppVersion": "0.3.0"
 }

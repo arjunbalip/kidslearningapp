@@ -2,7 +2,8 @@ import 'package:go_router/go_router.dart';
 
 import '../activities/learn_cards/letter_cards_screen.dart';
 import '../activities/learn_cards/number_cards_screen.dart';
-import '../features/common/coming_soon_screen.dart';
+import '../activities/tracing/trace_screen.dart';
+import '../activities/tracing/trace_shape.dart';
 import '../features/home/home_screen.dart';
 import '../features/parent/parent_access.dart';
 import '../features/parent/parent_gate_screen.dart';
@@ -32,9 +33,16 @@ final appRouter = GoRouter(
             ),
             GoRoute(
               path: 'trace/:index',
-              builder: (context, state) => const ComingSoonScreen(
-                message: 'Tracing is coming in the next step!',
-                backTo: '/letters',
+              builder: (context, state) => TraceScreen(
+                kind: TraceKind.upper,
+                initialIndex: _index(state),
+              ),
+            ),
+            GoRoute(
+              path: 'trace-small/:index',
+              builder: (context, state) => TraceScreen(
+                kind: TraceKind.lower,
+                initialIndex: _index(state),
               ),
             ),
           ],
@@ -51,9 +59,9 @@ final appRouter = GoRouter(
             ),
             GoRoute(
               path: 'trace/:index',
-              builder: (context, state) => const ComingSoonScreen(
-                message: 'Tracing is coming in the next step!',
-                backTo: '/numbers',
+              builder: (context, state) => TraceScreen(
+                kind: TraceKind.number,
+                initialIndex: _index(state),
               ),
             ),
           ],
