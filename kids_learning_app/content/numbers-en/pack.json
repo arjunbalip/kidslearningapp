@@ -1,6 +1,6 @@
 {
   "id": "numbers-en",
-  "version": 2,
+  "version": 3,
   "type": "numbers",
   "language": "en",
   "title": "Numbers",
@@ -66,8 +66,7 @@
       "image": "images/star.png",
       "trace": {
         "number": [
-          "M 15 0 L 12 45 C 30 35 70 35 70 70 C 70 105 20 105 8 88",
-          "M 15 0 L 65 0"
+          "M 65 0 L 15 0 L 12 45 C 30 35 70 35 70 70 C 70 105 20 105 8 88"
         ]
       }
     },
