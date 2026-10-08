@@ -69,6 +69,7 @@ void main(List<String> args) {
     for (final f in files) {
       final rel = f.path.substring(dir.path.length + 1).replaceAll('\\', '/');
       if (rel.split('/').any((part) => part.startsWith('.'))) continue; // hidden files
+      if (rel == 'voice.json') continue; // VoiceGen's script, not needed on the phone
       final bytes = f.readAsBytesSync();
       archive.addFile(ArchiveFile(rel, bytes.length, bytes));
     }

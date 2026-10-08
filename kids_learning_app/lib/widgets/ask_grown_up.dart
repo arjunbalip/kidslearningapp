@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../app/responsive.dart';
 import '../app/theme.dart';
+import '../core/audio/audio_service.dart';
 import 'pip.dart';
 import 'round_icon_button.dart';
 
 /// Shown when a child taps a world whose pack is not downloaded yet.
 Future<void> showAskGrownUp(BuildContext context) {
+  AudioService.instance.say(Prompt.askGrownUp);
   return showDialog<void>(
     context: context,
     builder: (context) => const _AskGrownUpDialog(),

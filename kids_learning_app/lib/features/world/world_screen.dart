@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
+import '../../core/audio/audio_service.dart';
 import '../../packs/pack_manager.dart';
 import '../../packs/pack_models.dart';
 import '../../widgets/metro.dart';
@@ -204,8 +205,20 @@ class _LetterChips extends StatelessWidget {
 }
 
 /// Shown if someone reaches a world whose pack is not installed.
-class _NotDownloaded extends StatelessWidget {
+class _NotDownloaded extends StatefulWidget {
   const _NotDownloaded();
+
+  @override
+  State<_NotDownloaded> createState() => _NotDownloadedState();
+}
+
+class _NotDownloadedState extends State<_NotDownloaded> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => AudioService.instance.say(Prompt.askGrownUp));
+  }
 
   @override
   Widget build(BuildContext context) {

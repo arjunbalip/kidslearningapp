@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Squash-and-bounce on tap, as the Design System asks for every tap.
+import '../core/audio/audio_service.dart';
+
+/// Squash-and-bounce on tap, as the Design System asks for every tap,
+/// with a soft tap sound.
 class Bouncy extends StatefulWidget {
   const Bouncy({super.key, required this.child, this.onTap});
 
@@ -26,7 +29,12 @@ class _BouncyState extends State<Bouncy> {
       onTapDown: (_) => _set(true),
       onTapUp: (_) => _set(false),
       onTapCancel: () => _set(false),
-      onTap: widget.onTap,
+      onTap: widget.onTap == null
+          ? null
+          : () {
+              AudioService.instance.effect(Sfx.tap);
+              widget.onTap!();
+            },
       child: AnimatedScale(
         scale: _down ? 0.92 : 1.0,
         duration: const Duration(milliseconds: 120),

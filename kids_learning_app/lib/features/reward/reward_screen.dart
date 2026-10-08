@@ -3,12 +3,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
+import '../../core/audio/audio_service.dart';
 import '../../core/progress/stars.dart';
 import '../../widgets/bouncy.dart';
 import '../../widgets/pip.dart';
 import '../../widgets/round_icon_button.dart';
 
-/// Screen 6: celebration after an activity. Adds one star.
+/// Screen 6: celebration after an activity. Adds one star, plays the
+/// jingle and says "Great job! You earned a star!".
 /// "Play again" goes back to the world; "Next" goes home.
 /// Portrait: star on top, words and buttons below. Landscape: side by side.
 class RewardScreen extends StatefulWidget {
@@ -29,7 +31,13 @@ class _RewardScreenState extends State<RewardScreen>
     super.initState();
     // Add the star after the first frame, so star counters elsewhere are
     // not asked to rebuild while this screen is being built.
-    WidgetsBinding.instance.addPostFrameCallback((_) => Stars.add());
+    // Sounds wait for the first frame too, so the screen we came from has
+    // stopped its voice first.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Stars.add();
+      AudioService.instance.effect(Sfx.jingle);
+      AudioService.instance.say(Prompt.reward);
+    });
     _pop = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),

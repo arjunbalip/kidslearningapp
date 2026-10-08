@@ -29,3 +29,7 @@ tools/**/obj/
 
 # Pack builder output (the files to upload to the pack server)
 server/
+
+# VoiceGen build output
+tools/VoiceGen/bin/
+tools/VoiceGen/obj/

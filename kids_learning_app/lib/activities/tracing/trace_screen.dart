@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
+import '../../core/audio/audio_service.dart';
 import '../../core/progress/stars.dart';
 import '../../packs/pack_manager.dart';
 import '../../packs/pack_models.dart';
@@ -35,6 +36,35 @@ class _TraceScreenState extends State<TraceScreen> {
   final Map<int, TraceShape> _shapes = {};
   late int _current = widget.initialIndex;
 
+  @override
+  void initState() {
+    super.initState();
+    // After the first frame, so the screen we came from has stopped its voice.
+    WidgetsBinding.instance.addPostFrameCallback((_) => _announce(first: true));
+  }
+
+  @override
+  void dispose() {
+    AudioService.instance.stopVoice();
+    super.dispose();
+  }
+
+  PackData? get _pack => PackManager.instance.packOfType(_isNumbers ? 'numbers' : 'letters');
+
+  /// Says the shape's name; the first time, "Put your finger on the green dot" first.
+  void _announce({bool first = false}) {
+    final pack = _pack;
+    if (pack == null || !mounted) return;
+    final items = _items(pack);
+    if (items.isEmpty) return;
+    final name = items[_current.clamp(0, items.length - 1).toInt()].audio['name'];
+    if (first) {
+      AudioService.instance.sayThen(Prompt.traceStart, pack.id, name);
+    } else {
+      AudioService.instance.sayPack(pack.id, name);
+    }
+  }
+
   bool get _isNumbers => widget.kind == TraceKind.number;
   String get _backTo => _isNumbers ? '/numbers' : '/letters';
   Color get _color => _isNumbers ? AppColors.numbersGreen : AppColors.lettersBlue;
@@ -56,18 +86,16 @@ class _TraceScreenState extends State<TraceScreen> {
       _current = index.clamp(0, count - 1).toInt();
       _canvas = GlobalKey<TraceCanvasState>();
     });
+    _announce();
   }
 
   @override
   Widget build(BuildContext context) {
-    final pack = PackManager.instance.packOfType(_isNumbers ? 'numbers' : 'letters');
+    final pack = _pack;
     if (pack == null) return MissingPackScreen(backTo: _backTo);
     final items = _items(pack);
     if (items.isEmpty) {
-      return MissingPackScreen(
-        backTo: _backTo,
-        message: 'Ask a grown-up to update this!',
-      );
+      return MissingPackScreen(backTo: _backTo, needsUpdate: true);
     }
     final count = items.length;
     final index = _current.clamp(0, count - 1).toInt();

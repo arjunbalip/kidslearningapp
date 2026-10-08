@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
+import '../../core/audio/audio_service.dart';
 import '../../widgets/round_icon_button.dart';
 import '../../widgets/top_bar.dart';
 
@@ -13,6 +14,7 @@ import '../../widgets/top_bar.dart';
 /// Landscape: previous and next beside the card; replay in the top bar.
 ///
 /// Going past the last card opens the Reward screen, which returns to [backTo].
+/// [onShow] says a card aloud: when it appears and when replay is tapped.
 class LearnCardsFrame extends StatefulWidget {
   const LearnCardsFrame({
     super.key,
@@ -21,6 +23,7 @@ class LearnCardsFrame extends StatefulWidget {
     required this.color,
     required this.backTo,
     required this.cardBuilder,
+    required this.onShow,
   });
 
   final int itemCount;
@@ -28,6 +31,7 @@ class LearnCardsFrame extends StatefulWidget {
   final Color color;
   final String backTo;
   final Widget Function(BuildContext context, int index) cardBuilder;
+  final void Function(int index) onShow;
 
   @override
   State<LearnCardsFrame> createState() => _LearnCardsFrameState();
@@ -42,11 +46,14 @@ class _LearnCardsFrameState extends State<LearnCardsFrame> {
     super.initState();
     _current = widget.initialIndex.clamp(0, widget.itemCount - 1).toInt();
     _pages = PageController(initialPage: _current);
+    // After the first frame, so the screen we came from has stopped its voice.
+    WidgetsBinding.instance.addPostFrameCallback((_) => widget.onShow(_current));
   }
 
   @override
   void dispose() {
     _pages.dispose();
+    AudioService.instance.stopVoice();
     super.dispose();
   }
 
@@ -68,9 +75,7 @@ class _LearnCardsFrameState extends State<LearnCardsFrame> {
     }
   }
 
-  void _replay() {
-    // Voice playback arrives with the audio milestone.
-  }
+  void _replay() => widget.onShow(_current);
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +84,10 @@ class _LearnCardsFrameState extends State<LearnCardsFrame> {
     final pager = PageView.builder(
       controller: _pages,
       itemCount: widget.itemCount,
-      onPageChanged: (i) => setState(() => _current = i),
+      onPageChanged: (i) {
+        setState(() => _current = i);
+        widget.onShow(i);
+      },
       itemBuilder: (context, i) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6),
         child: widget.cardBuilder(context, i),

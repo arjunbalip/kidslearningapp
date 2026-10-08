@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../app/theme.dart';
+import '../../core/audio/audio_service.dart';
 import 'trace_shape.dart';
 import 'tracer.dart';
 
@@ -46,12 +47,15 @@ class TraceCanvasState extends State<TraceCanvas> with TickerProviderStateMixin 
     duration: const Duration(milliseconds: 900),
   );
   Timer? _idle;
+  DateTime _lastHintVoice = DateTime(2000);
 
   // Shape units to pixels, set on each layout.
   double _scale = 1;
   Offset _origin = Offset.zero;
 
   static const _idleDelay = Duration(seconds: 4);
+  static const _hintVoiceGap = Duration(seconds: 6); // do not nag
+  static const _afterCheer = Duration(milliseconds: 800); // let praise finish
   static const _minTolerancePx = 22.0;
 
   @override
@@ -94,12 +98,20 @@ class TraceCanvasState extends State<TraceCanvas> with TickerProviderStateMixin 
     switch (e) {
       case TraceEvent.hint:
         _pulse.forward(from: 0);
+        final now = DateTime.now();
+        if (now.difference(_lastHintVoice) > _hintVoiceGap) {
+          _lastHintVoice = now;
+          AudioService.instance.say(Prompt.hint);
+        }
       case TraceEvent.strokeDone:
         HapticFeedback.selectionClick();
+        AudioService.instance.effect(Sfx.pop);
       case TraceEvent.shapeDone:
         HapticFeedback.mediumImpact();
+        AudioService.instance.effect(Sfx.chime);
+        AudioService.instance.praise();
         _idle?.cancel();
-        _cheer.forward(from: 0).then((_) {
+        _cheer.forward(from: 0).then((_) => Future.delayed(_afterCheer)).then((_) {
           if (mounted) widget.onDone();
         });
       case TraceEvent.none:

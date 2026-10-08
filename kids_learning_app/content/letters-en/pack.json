@@ -14,6 +14,7 @@
       "upper": "A",
       "lower": "a",
       "word": "Apple",
+      "sound": "æ",
       "image": "images/apple.png",
       "trace": {
         "upper": [
@@ -32,6 +33,7 @@
       "upper": "B",
       "lower": "b",
       "word": "Ball",
+      "sound": "bə",
       "image": "images/ball.png",
       "trace": {
         "upper": [
@@ -50,6 +52,7 @@
       "upper": "C",
       "lower": "c",
       "word": "Cat",
+      "sound": "kə",
       "image": "images/cat.png",
       "trace": {
         "upper": [
@@ -65,6 +68,7 @@
       "upper": "D",
       "lower": "d",
       "word": "Dog",
+      "sound": "də",
       "image": "images/dog.png",
       "trace": {
         "upper": [
@@ -82,6 +86,7 @@
       "upper": "E",
       "lower": "e",
       "word": "Elephant",
+      "sound": "ɛ",
       "image": "images/elephant.png",
       "trace": {
         "upper": [
@@ -100,6 +105,7 @@
       "upper": "F",
       "lower": "f",
       "word": "Fish",
+      "sound": "fː",
       "image": "images/fish.png",
       "trace": {
         "upper": [
@@ -118,6 +124,7 @@
       "upper": "G",
       "lower": "g",
       "word": "Grapes",
+      "sound": "gə",
       "image": "images/grapes.png",
       "trace": {
         "upper": [
@@ -135,6 +142,7 @@
       "upper": "H",
       "lower": "h",
       "word": "House",
+      "sound": "hə",
       "image": "images/house.png",
       "trace": {
         "upper": [
@@ -153,6 +161,7 @@
       "upper": "I",
       "lower": "i",
       "word": "Ice cream",
+      "sound": "ɪ",
       "image": "images/ice_cream.png",
       "trace": {
         "upper": [
@@ -171,6 +180,7 @@
       "upper": "J",
       "lower": "j",
       "word": "Jar",
+      "sound": "dʒə",
       "image": "images/jar.png",
       "trace": {
         "upper": [
@@ -187,6 +197,7 @@
       "upper": "K",
       "lower": "k",
       "word": "Kite",
+      "sound": "kə",
       "image": "images/kite.png",
       "trace": {
         "upper": [
@@ -205,6 +216,7 @@
       "upper": "L",
       "lower": "l",
       "word": "Lion",
+      "sound": "lː",
       "image": "images/lion.png",
       "trace": {
         "upper": [
@@ -220,6 +232,7 @@
       "upper": "M",
       "lower": "m",
       "word": "Monkey",
+      "sound": "mː",
       "image": "images/monkey.png",
       "trace": {
         "upper": [
@@ -238,6 +251,7 @@
       "upper": "N",
       "lower": "n",
       "word": "Nest",
+      "sound": "nː",
       "image": "images/nest.png",
       "trace": {
         "upper": [
@@ -255,6 +269,7 @@
       "upper": "O",
       "lower": "o",
       "word": "Orange",
+      "sound": "ɒ",
       "image": "images/orange.png",
       "trace": {
         "upper": [
@@ -270,6 +285,7 @@
       "upper": "P",
       "lower": "p",
       "word": "Parrot",
+      "sound": "pə",
       "image": "images/parrot.png",
       "trace": {
         "upper": [
@@ -287,6 +303,7 @@
       "upper": "Q",
       "lower": "q",
       "word": "Queen",
+      "sound": "kwə",
       "image": "images/queen.png",
       "trace": {
         "upper": [
@@ -304,6 +321,7 @@
       "upper": "R",
       "lower": "r",
       "word": "Rabbit",
+      "sound": "ɹː",
       "image": "images/rabbit.png",
       "trace": {
         "upper": [
@@ -322,6 +340,7 @@
       "upper": "S",
       "lower": "s",
       "word": "Sun",
+      "sound": "sː",
       "image": "images/sun.png",
       "trace": {
         "upper": [
@@ -337,6 +356,7 @@
       "upper": "T",
       "lower": "t",
       "word": "Tiger",
+      "sound": "tə",
       "image": "images/tiger.png",
       "trace": {
         "upper": [
@@ -354,6 +374,7 @@
       "upper": "U",
       "lower": "u",
       "word": "Umbrella",
+      "sound": "ʌ",
       "image": "images/umbrella.png",
       "trace": {
         "upper": [
@@ -370,6 +391,7 @@
       "upper": "V",
       "lower": "v",
       "word": "Violin",
+      "sound": "vː",
       "image": "images/violin.png",
       "trace": {
         "upper": [
@@ -385,6 +407,7 @@
       "upper": "W",
       "lower": "w",
       "word": "Watch",
+      "sound": "wə",
       "image": "images/watch.png",
       "trace": {
         "upper": [
@@ -400,6 +423,7 @@
       "upper": "X",
       "lower": "x",
       "word": "Xylophone",
+      "sound": "ks",
       "trace": {
         "upper": [
           "M 5 0 L 70 100",
@@ -416,6 +440,7 @@
       "upper": "Y",
       "lower": "y",
       "word": "Yo-yo",
+      "sound": "jə",
       "image": "images/yoyo.png",
       "trace": {
         "upper": [
@@ -433,6 +458,7 @@
       "upper": "Z",
       "lower": "z",
       "word": "Zebra",
+      "sound": "zː",
       "image": "images/zebra.png",
       "trace": {
         "upper": [

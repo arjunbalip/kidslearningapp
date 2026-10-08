@@ -22,6 +22,8 @@ dependencies:
   hive_ce: ^2.0.0         # pack files in the browser (IndexedDB) on web
   # Milestone 4: tracing
   path_parsing: ^1.1.0     # stroke shapes in pack.json are SVG path strings
+  # Milestone 3: audio
+  just_audio: ^0.10.6      # voice clips and sound effects
 
 dev_dependencies:
   flutter_test:
@@ -34,6 +36,9 @@ flutter:
   # Content pictures are NOT bundled any more: they arrive in downloaded packs.
   assets:
     - assets/images/
+    # App sounds: effects (tools/sfx_gen.dart) and app voice prompts (VoiceGen).
+    - assets/audio/sfx/
+    - assets/audio/voice/
 
   fonts:
     - family: Baloo2

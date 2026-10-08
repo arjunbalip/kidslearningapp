@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
+import '../../core/audio/audio_service.dart';
 import '../../packs/pack_manager.dart';
 import '../../packs/pack_models.dart';
 import '../../widgets/pack_image.dart';
@@ -24,6 +25,7 @@ class LetterCardsScreen extends StatelessWidget {
       initialIndex: initialIndex,
       color: AppColors.lettersBlue,
       backTo: '/letters',
+      onShow: (i) => AudioService.instance.sayPack(pack.id, pack.items[i].audio['card']),
       cardBuilder: (context, i) => _LetterCard(packId: pack.id, item: pack.items[i]),
     );
   }

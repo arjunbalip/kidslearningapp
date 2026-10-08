@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
+import '../../core/audio/audio_service.dart';
 import '../../core/progress/stars.dart';
 import '../../packs/pack_manager.dart';
 import '../../widgets/ask_grown_up.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends StatelessWidget {
     if (PackManager.instance.packOfType(type) == null) {
       showAskGrownUp(context);
     } else {
+      AudioService.instance.say(type == 'letters' ? Prompt.letters : Prompt.numbers);
       context.go('/$type');
     }
   }
