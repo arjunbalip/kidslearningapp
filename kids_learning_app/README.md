@@ -11,7 +11,7 @@ New here? Start with **SETUP.md**.
 | 1 | App shell: Home, Letters and Numbers worlds, learn cards, Reward, parent gate | Done |
 | 2 | Responsive layouts; pack system: manifest, download, verify, unzip, offline storage (phone and web); pack builder and dev server | Done |
 | 3 | Audio: voice clips, sound effects, replay button | Next |
-| 4 | Tracing engine for capital and small letters and numbers | Ready to test |
+| 4 | Tracing engine for capital and small letters and numbers | Done |
 | 5 | Saved progress, Pip animations, polish, Play Store release | Planned |
 
 ## Folders
