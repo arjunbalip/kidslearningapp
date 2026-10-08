@@ -198,7 +198,12 @@ class PackManager extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final url = Uri.parse('$packServerBase/').resolve(entry.url).toString();
+      // The checksum in the address makes every new file a new address,
+      // so no browser or server cache can hand back an old copy.
+      final base = Uri.parse('$packServerBase/').resolve(entry.url);
+      final url = entry.sha256.isEmpty
+          ? base.toString()
+          : base.replace(queryParameters: {'sha': entry.sha256.substring(0, 16)}).toString();
       final res = await _dio.get<List<int>>(
         url,
         cancelToken: task.cancel,

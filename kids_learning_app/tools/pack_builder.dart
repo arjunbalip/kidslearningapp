@@ -70,13 +70,27 @@ void main(List<String> args) {
       final rel = f.path.substring(dir.path.length + 1).replaceAll('\\', '/');
       if (rel.split('/').any((part) => part.startsWith('.'))) continue; // hidden files
       if (rel == 'voice.json') continue; // VoiceGen's script, not needed on the phone
-      final bytes = f.readAsBytesSync();
+      var bytes = f.readAsBytesSync();
+      // Same bytes whatever line endings git used on this PC.
+      if (rel.endsWith('.json')) {
+        bytes = utf8.encode(utf8.decode(bytes).replaceAll('\r\n', '\n'));
+      }
       archive.addFile(ArchiveFile(rel, bytes.length, bytes));
     }
 
     final zip = ZipEncoder().encode(archive)!;
     final zipName = '$id-v$version.zip';
-    File('${packsDir.path}/$zipName').writeAsBytesSync(zip);
+    final zipFile = File('${packsDir.path}/$zipName');
+
+    // A version must never change once built: phones, browsers and the
+    // server cache pack files by version, so changed content needs a new one.
+    if (zipFile.existsSync() && !_sameFiles(zipFile.readAsBytesSync(), archive)) {
+      stderr.writeln('  ERROR: content changed but "version" is still $version. '
+          'Raise "version" in pack.json and run again.');
+      failed++;
+      continue;
+    }
+    zipFile.writeAsBytesSync(zip);
 
     entries.add({
       'id': id,
@@ -92,6 +106,13 @@ void main(List<String> args) {
         '${(zip.length / 1024).toStringAsFixed(0)} KB -> server/packs/$zipName');
   }
 
+  // Never publish a manifest with packs missing: phones would think
+  // those packs were withdrawn.
+  if (failed > 0) {
+    stderr.writeln('\n$failed pack folder(s) had errors. server/manifest.json was not changed.');
+    exit(1);
+  }
+
   final manifest = {
     'schema': 1,
     'updated': DateTime.now().toUtc().toIso8601String().substring(0, 10),
@@ -100,11 +121,6 @@ void main(List<String> args) {
   File('server/manifest.json')
       .writeAsStringSync(const JsonEncoder.withIndent('  ').convert(manifest));
   stdout.writeln('\nWrote server/manifest.json with ${entries.length} pack(s).');
-
-  if (failed > 0) {
-    stderr.writeln('$failed pack folder(s) had errors and were skipped.');
-    exit(1);
-  }
 }
 
 List<String> _check(Map<String, dynamic> pack, Directory dir) {
@@ -148,6 +164,22 @@ List<String> _check(Map<String, dynamic> pack, Directory dir) {
     if (tracing) problems.addAll(_checkTrace(raw, traceKeys));
   }
   return problems;
+}
+
+/// True when an existing zip holds exactly the same files as [archive].
+bool _sameFiles(List<int> oldZip, Archive archive) {
+  final old = ZipDecoder().decodeBytes(oldZip);
+  final oldFiles = {for (final f in old.files) if (f.isFile) f.name: f.content as List<int>};
+  final newFiles = {for (final f in archive.files) f.name: f.content as List<int>};
+  if (oldFiles.length != newFiles.length) return false;
+  for (final e in newFiles.entries) {
+    final o = oldFiles[e.key];
+    if (o == null || o.length != e.value.length) return false;
+    for (var i = 0; i < o.length; i++) {
+      if (o[i] != e.value[i]) return false;
+    }
+  }
+  return true;
 }
 
 /// Each stroke must be an SVG path string with exactly one starting point.
