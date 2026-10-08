@@ -10,6 +10,7 @@
 //   pop.wav    a tracing stroke finished
 //   chime.wav  a whole letter or number traced
 //   jingle.wav the Reward screen
+//   boom.wav   the game cannon firing (a soft, low "thump", not a bang)
 
 import 'dart:io';
 import 'dart:math' as math;
@@ -24,11 +25,27 @@ void main() {
     'pop': _pop(),
     'chime': _chime(),
     'jingle': _jingle(),
+    'boom': _boom(),
   };
   for (final e in sounds.entries) {
     final file = File('${dir.path}/${e.key}.wav')..writeAsBytesSync(_wav(e.value));
     stdout.writeln('  ${file.path}  ${(file.lengthSync() / 1024).toStringAsFixed(1)} KB');
   }
+}
+
+/// A soft, low thump: pitch falls quickly, like a toy cannon.
+List<double> _boom() {
+  const seconds = 0.25;
+  final n = (seconds * rate).round();
+  var phase = 0.0;
+  return [
+    for (var i = 0; i < n; i++)
+      () {
+        final t = i / rate;
+        phase += 2 * math.pi * (180 - 120 * t / seconds) / rate;
+        return (math.sin(phase) + 0.3 * math.sin(2 * phase)) * math.exp(-t * 14) * _fadeIn(i) * _fadeOut(i, n);
+      }(),
+  ];
 }
 
 /// A short, soft wooden "tok".

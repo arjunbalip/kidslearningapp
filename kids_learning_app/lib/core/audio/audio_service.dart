@@ -7,7 +7,7 @@ import 'package:just_audio/just_audio.dart';
 import '../../packs/pack_manager.dart';
 
 /// Sound effects bundled with the app (made by tools/sfx_gen.dart).
-enum Sfx { tap, pop, chime, jingle }
+enum Sfx { tap, pop, chime, jingle, boom }
 
 /// Spoken prompts bundled with the app (made by VoiceGen from
 /// tools/VoiceGen/app_prompts.json into assets/audio/voice/).
@@ -18,7 +18,9 @@ enum Prompt {
   hint,
   reward,
   askGrownUp,
-  askUpdate;
+  askUpdate,
+  shootInOrder,
+  tryAgain;
 
   /// File name: traceStart -> trace_start.
   String get file =>

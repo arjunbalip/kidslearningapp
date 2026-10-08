@@ -111,6 +111,18 @@ class WorldScreen extends StatelessWidget {
           sample: 'a',
           route: '/letters/trace-small/0',
         ),
+      MetroTileSpec(
+        w: 2,
+        h: 2,
+        child: MetroTile(
+          color: AppColors.playPink,
+          label: 'Play',
+          onTap: () => context.go('/$_type/play'),
+          child: const FittedBox(
+            child: Icon(Icons.celebration_rounded, size: 150, color: Colors.white),
+          ),
+        ),
+      ),
       if (_isLetters)
         MetroTileSpec(
           w: cols,
