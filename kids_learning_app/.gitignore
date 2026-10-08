@@ -33,3 +33,4 @@ server/
 # VoiceGen build output
 tools/VoiceGen/bin/
 tools/VoiceGen/obj/
+tools/VoiceGen/piper/

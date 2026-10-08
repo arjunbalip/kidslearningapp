@@ -1,9 +1,21 @@
 {
-  "voice": "en-IN-NeerjaNeural",
-  "lang": "en-IN",
-  "rate": "-10%",
-  "clips": {
-    "name": "<say-as interpret-as=\"characters\">{upper}</say-as>",
-    "card": "<say-as interpret-as=\"characters\">{upper}</say-as>. <break time=\"300ms\"/> <phoneme alphabet=\"ipa\" ph=\"{sound}\">{lower}</phoneme>, <phoneme alphabet=\"ipa\" ph=\"{sound}\">{lower}</phoneme>. <break time=\"300ms\"/> <say-as interpret-as=\"characters\">{upper}</say-as> is for {word}!"
+  "engine": "piper",
+  "piper": {
+    "model": "tools/VoiceGen/piper/en_GB-cori-high.onnx",
+    "lengthScale": 1.15,
+    "sentenceSilence": 0.35,
+    "clips": {
+      "name": "{upper}.",
+      "card": "{upper}. [{soundSay}, {soundSay}.] {upper} is for {word}!"
+    }
+  },
+  "azure": {
+    "voice": "en-IN-NeerjaNeural",
+    "lang": "en-IN",
+    "rate": "-10%",
+    "clips": {
+      "name": "<say-as interpret-as=\"characters\">{upper}</say-as>",
+      "card": "<say-as interpret-as=\"characters\">{upper}</say-as>. <break time=\"300ms\"/> <phoneme alphabet=\"ipa\" ph=\"{sound}\">{lower}</phoneme>, <phoneme alphabet=\"ipa\" ph=\"{sound}\">{lower}</phoneme>. <break time=\"300ms\"/> <say-as interpret-as=\"characters\">{upper}</say-as> is for {word}!"
+    }
   }
 }

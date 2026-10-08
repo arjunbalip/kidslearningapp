@@ -1,6 +1,6 @@
 {
   "id": "letters-en",
-  "version": 3,
+  "version": 4,
   "type": "letters",
   "language": "en",
   "title": "Letters",
@@ -15,6 +15,7 @@
       "lower": "a",
       "word": "Apple",
       "sound": "æ",
+      "soundSay": "",
       "image": "images/apple.png",
       "trace": {
         "upper": [
@@ -26,6 +27,10 @@
           "M 55 60 A 25 25 0 1 0 55 90",
           "M 60 50 L 60 100"
         ]
+      },
+      "audio": {
+        "name": "audio/a_name.mp3",
+        "card": "audio/a_card.mp3"
       }
     },
     {
@@ -34,6 +39,7 @@
       "lower": "b",
       "word": "Ball",
       "sound": "bə",
+      "soundSay": "buh",
       "image": "images/ball.png",
       "trace": {
         "upper": [
@@ -45,6 +51,10 @@
           "M 10 0 L 10 100",
           "M 10 62 A 25 25 0 1 1 10 88"
         ]
+      },
+      "audio": {
+        "name": "audio/b_name.mp3",
+        "card": "audio/b_card.mp3"
       }
     },
     {
@@ -53,6 +63,7 @@
       "lower": "c",
       "word": "Cat",
       "sound": "kə",
+      "soundSay": "kuh",
       "image": "images/cat.png",
       "trace": {
         "upper": [
@@ -61,6 +72,10 @@
         "lower": [
           "M 58 60 A 25 25 0 1 0 58 90"
         ]
+      },
+      "audio": {
+        "name": "audio/c_name.mp3",
+        "card": "audio/c_card.mp3"
       }
     },
     {
@@ -69,6 +84,7 @@
       "lower": "d",
       "word": "Dog",
       "sound": "də",
+      "soundSay": "duh",
       "image": "images/dog.png",
       "trace": {
         "upper": [
@@ -79,6 +95,10 @@
           "M 55 60 A 25 25 0 1 0 55 90",
           "M 60 0 L 60 100"
         ]
+      },
+      "audio": {
+        "name": "audio/d_name.mp3",
+        "card": "audio/d_card.mp3"
       }
     },
     {
@@ -87,6 +107,7 @@
       "lower": "e",
       "word": "Elephant",
       "sound": "ɛ",
+      "soundSay": "",
       "image": "images/elephant.png",
       "trace": {
         "upper": [
@@ -98,6 +119,10 @@
         "lower": [
           "M 12 75 L 60 75 A 25 25 0 1 0 55 92"
         ]
+      },
+      "audio": {
+        "name": "audio/e_name.mp3",
+        "card": "audio/e_card.mp3"
       }
     },
     {
@@ -106,6 +131,7 @@
       "lower": "f",
       "word": "Fish",
       "sound": "fː",
+      "soundSay": "fuh",
       "image": "images/fish.png",
       "trace": {
         "upper": [
@@ -117,6 +143,10 @@
           "M 58 10 C 50 -2 25 -2 25 20 L 25 100",
           "M 5 50 L 50 50"
         ]
+      },
+      "audio": {
+        "name": "audio/f_name.mp3",
+        "card": "audio/f_card.mp3"
       }
     },
     {
@@ -125,6 +155,7 @@
       "lower": "g",
       "word": "Grapes",
       "sound": "gə",
+      "soundSay": "guh",
       "image": "images/grapes.png",
       "trace": {
         "upper": [
@@ -135,6 +166,10 @@
           "M 55 60 A 25 25 0 1 0 55 90",
           "M 60 50 L 60 130 A 24 20 0 0 1 12 130"
         ]
+      },
+      "audio": {
+        "name": "audio/g_name.mp3",
+        "card": "audio/g_card.mp3"
       }
     },
     {
@@ -143,6 +178,7 @@
       "lower": "h",
       "word": "House",
       "sound": "hə",
+      "soundSay": "huh",
       "image": "images/house.png",
       "trace": {
         "upper": [
@@ -154,6 +190,10 @@
           "M 10 0 L 10 100",
           "M 10 72 A 24 22 0 0 1 58 72 L 58 100"
         ]
+      },
+      "audio": {
+        "name": "audio/h_name.mp3",
+        "card": "audio/h_card.mp3"
       }
     },
     {
@@ -162,6 +202,7 @@
       "lower": "i",
       "word": "Ice cream",
       "sound": "ɪ",
+      "soundSay": "",
       "image": "images/ice_cream.png",
       "trace": {
         "upper": [
@@ -173,6 +214,10 @@
           "M 30 50 L 30 100",
           "M 30 26 L 30 27"
         ]
+      },
+      "audio": {
+        "name": "audio/i_name.mp3",
+        "card": "audio/i_card.mp3"
       }
     },
     {
@@ -181,6 +226,7 @@
       "lower": "j",
       "word": "Jar",
       "sound": "dʒə",
+      "soundSay": "juh",
       "image": "images/jar.png",
       "trace": {
         "upper": [
@@ -190,6 +236,10 @@
           "M 40 50 L 40 130 A 20 20 0 0 1 0 130",
           "M 40 26 L 40 27"
         ]
+      },
+      "audio": {
+        "name": "audio/j_name.mp3",
+        "card": "audio/j_card.mp3"
       }
     },
     {
@@ -198,6 +248,7 @@
       "lower": "k",
       "word": "Kite",
       "sound": "kə",
+      "soundSay": "kuh",
       "image": "images/kite.png",
       "trace": {
         "upper": [
@@ -209,6 +260,10 @@
           "M 10 0 L 10 100",
           "M 55 50 L 12 76 L 58 100"
         ]
+      },
+      "audio": {
+        "name": "audio/k_name.mp3",
+        "card": "audio/k_card.mp3"
       }
     },
     {
@@ -217,6 +272,7 @@
       "lower": "l",
       "word": "Lion",
       "sound": "lː",
+      "soundSay": "luh",
       "image": "images/lion.png",
       "trace": {
         "upper": [
@@ -225,6 +281,10 @@
         "lower": [
           "M 30 0 L 30 100"
         ]
+      },
+      "audio": {
+        "name": "audio/l_name.mp3",
+        "card": "audio/l_card.mp3"
       }
     },
     {
@@ -233,6 +293,7 @@
       "lower": "m",
       "word": "Monkey",
       "sound": "mː",
+      "soundSay": "muh",
       "image": "images/monkey.png",
       "trace": {
         "upper": [
@@ -244,6 +305,10 @@
           "M 10 70 A 18 20 0 0 1 46 70 L 46 100",
           "M 46 70 A 18 20 0 0 1 82 70 L 82 100"
         ]
+      },
+      "audio": {
+        "name": "audio/m_name.mp3",
+        "card": "audio/m_card.mp3"
       }
     },
     {
@@ -252,6 +317,7 @@
       "lower": "n",
       "word": "Nest",
       "sound": "nː",
+      "soundSay": "nuh",
       "image": "images/nest.png",
       "trace": {
         "upper": [
@@ -262,6 +328,10 @@
           "M 10 50 L 10 100",
           "M 10 72 A 24 22 0 0 1 58 72 L 58 100"
         ]
+      },
+      "audio": {
+        "name": "audio/n_name.mp3",
+        "card": "audio/n_card.mp3"
       }
     },
     {
@@ -270,6 +340,7 @@
       "lower": "o",
       "word": "Orange",
       "sound": "ɒ",
+      "soundSay": "",
       "image": "images/orange.png",
       "trace": {
         "upper": [
@@ -278,6 +349,10 @@
         "lower": [
           "M 35 50 A 25 25 0 1 0 35 100 A 25 25 0 1 0 35 50"
         ]
+      },
+      "audio": {
+        "name": "audio/o_name.mp3",
+        "card": "audio/o_card.mp3"
       }
     },
     {
@@ -286,6 +361,7 @@
       "lower": "p",
       "word": "Parrot",
       "sound": "pə",
+      "soundSay": "puh",
       "image": "images/parrot.png",
       "trace": {
         "upper": [
@@ -296,6 +372,10 @@
           "M 10 50 L 10 150",
           "M 10 62 A 25 25 0 1 1 10 88"
         ]
+      },
+      "audio": {
+        "name": "audio/p_name.mp3",
+        "card": "audio/p_card.mp3"
       }
     },
     {
@@ -304,6 +384,7 @@
       "lower": "q",
       "word": "Queen",
       "sound": "kwə",
+      "soundSay": "kwuh",
       "image": "images/queen.png",
       "trace": {
         "upper": [
@@ -314,6 +395,10 @@
           "M 55 60 A 25 25 0 1 0 55 90",
           "M 60 50 L 60 150"
         ]
+      },
+      "audio": {
+        "name": "audio/q_name.mp3",
+        "card": "audio/q_card.mp3"
       }
     },
     {
@@ -322,6 +407,7 @@
       "lower": "r",
       "word": "Rabbit",
       "sound": "ɹː",
+      "soundSay": "ruh",
       "image": "images/rabbit.png",
       "trace": {
         "upper": [
@@ -333,6 +419,10 @@
           "M 10 50 L 10 100",
           "M 10 72 C 15 52 40 45 55 56"
         ]
+      },
+      "audio": {
+        "name": "audio/r_name.mp3",
+        "card": "audio/r_card.mp3"
       }
     },
     {
@@ -341,6 +431,7 @@
       "lower": "s",
       "word": "Sun",
       "sound": "sː",
+      "soundSay": "suh",
       "image": "images/sun.png",
       "trace": {
         "upper": [
@@ -349,6 +440,10 @@
         "lower": [
           "M 55 58 C 48 48 12 48 12 63 C 12 76 55 72 55 87 C 55 102 15 103 8 92"
         ]
+      },
+      "audio": {
+        "name": "audio/s_name.mp3",
+        "card": "audio/s_card.mp3"
       }
     },
     {
@@ -357,6 +452,7 @@
       "lower": "t",
       "word": "Tiger",
       "sound": "tə",
+      "soundSay": "tuh",
       "image": "images/tiger.png",
       "trace": {
         "upper": [
@@ -367,6 +463,10 @@
           "M 30 10 L 30 100",
           "M 10 45 L 52 45"
         ]
+      },
+      "audio": {
+        "name": "audio/t_name.mp3",
+        "card": "audio/t_card.mp3"
       }
     },
     {
@@ -375,6 +475,7 @@
       "lower": "u",
       "word": "Umbrella",
       "sound": "ʌ",
+      "soundSay": "uh",
       "image": "images/umbrella.png",
       "trace": {
         "upper": [
@@ -384,6 +485,10 @@
           "M 10 50 L 10 78 A 23 22 0 0 0 56 78",
           "M 56 50 L 56 100"
         ]
+      },
+      "audio": {
+        "name": "audio/u_name.mp3",
+        "card": "audio/u_card.mp3"
       }
     },
     {
@@ -392,6 +497,7 @@
       "lower": "v",
       "word": "Violin",
       "sound": "vː",
+      "soundSay": "vuh",
       "image": "images/violin.png",
       "trace": {
         "upper": [
@@ -400,6 +506,10 @@
         "lower": [
           "M 5 50 L 32 100 L 60 50"
         ]
+      },
+      "audio": {
+        "name": "audio/v_name.mp3",
+        "card": "audio/v_card.mp3"
       }
     },
     {
@@ -408,6 +518,7 @@
       "lower": "w",
       "word": "Watch",
       "sound": "wə",
+      "soundSay": "wuh",
       "image": "images/watch.png",
       "trace": {
         "upper": [
@@ -416,6 +527,10 @@
         "lower": [
           "M 0 50 L 18 100 L 38 62 L 58 100 L 76 50"
         ]
+      },
+      "audio": {
+        "name": "audio/w_name.mp3",
+        "card": "audio/w_card.mp3"
       }
     },
     {
@@ -424,6 +539,7 @@
       "lower": "x",
       "word": "Xylophone",
       "sound": "ks",
+      "soundSay": "",
       "trace": {
         "upper": [
           "M 5 0 L 70 100",
@@ -433,6 +549,10 @@
           "M 8 50 L 56 100",
           "M 56 50 L 8 100"
         ]
+      },
+      "audio": {
+        "name": "audio/x_name.mp3",
+        "card": "audio/x_card.mp3"
       }
     },
     {
@@ -441,6 +561,7 @@
       "lower": "y",
       "word": "Yo-yo",
       "sound": "jə",
+      "soundSay": "yuh",
       "image": "images/yoyo.png",
       "trace": {
         "upper": [
@@ -451,6 +572,10 @@
           "M 8 50 L 40 100",
           "M 60 50 L 20 150"
         ]
+      },
+      "audio": {
+        "name": "audio/y_name.mp3",
+        "card": "audio/y_card.mp3"
       }
     },
     {
@@ -459,6 +584,7 @@
       "lower": "z",
       "word": "Zebra",
       "sound": "zː",
+      "soundSay": "zuh",
       "image": "images/zebra.png",
       "trace": {
         "upper": [
@@ -467,6 +593,10 @@
         "lower": [
           "M 8 50 L 56 50 L 8 100 L 56 100"
         ]
+      },
+      "audio": {
+        "name": "audio/z_name.mp3",
+        "card": "audio/z_card.mp3"
       }
     }
   ],

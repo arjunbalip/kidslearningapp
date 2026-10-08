@@ -1,7 +1,15 @@
 {
-  "voice": "en-IN-NeerjaNeural",
-  "lang": "en-IN",
-  "rate": "-10%",
+  "engine": "piper",
+  "piper": {
+    "model": "tools/VoiceGen/piper/en_GB-cori-high.onnx",
+    "lengthScale": 1.15,
+    "sentenceSilence": 0.35
+  },
+  "azure": {
+    "voice": "en-IN-NeerjaNeural",
+    "lang": "en-IN",
+    "rate": "-10%"
+  },
   "prompts": {
     "letters": "Letters!",
     "numbers": "Numbers!",

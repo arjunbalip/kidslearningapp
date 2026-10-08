@@ -1,10 +1,22 @@
 {
-  "voice": "en-IN-NeerjaNeural",
-  "lang": "en-IN",
-  "rate": "-10%",
+  "engine": "piper",
   "numberWords": ["One", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"],
-  "clips": {
-    "name": "{word}",
-    "card": "{word}! <break time=\"400ms\"/> {count}. <break time=\"300ms\"/> {label}"
+  "piper": {
+    "model": "tools/VoiceGen/piper/en_GB-cori-high.onnx",
+    "lengthScale": 1.15,
+    "sentenceSilence": 0.35,
+    "clips": {
+      "name": "{word}.",
+      "card": "{word}! {count}. {label}"
+    }
+  },
+  "azure": {
+    "voice": "en-IN-NeerjaNeural",
+    "lang": "en-IN",
+    "rate": "-10%",
+    "clips": {
+      "name": "{word}",
+      "card": "{word}! <break time=\"400ms\"/> {count}. <break time=\"300ms\"/> {label}"
+    }
   }
 }

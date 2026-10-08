@@ -1,6 +1,6 @@
 {
   "id": "numbers-en",
-  "version": 3,
+  "version": 4,
   "type": "numbers",
   "language": "en",
   "title": "Numbers",
@@ -19,6 +19,10 @@
         "number": [
           "M 20 20 L 40 0 L 40 100"
         ]
+      },
+      "audio": {
+        "name": "audio/1_name.mp3",
+        "card": "audio/1_card.mp3"
       }
     },
     {
@@ -31,6 +35,10 @@
         "number": [
           "M 10 25 C 10 -5 70 -5 70 25 C 70 50 10 75 8 100 L 72 100"
         ]
+      },
+      "audio": {
+        "name": "audio/2_name.mp3",
+        "card": "audio/2_card.mp3"
       }
     },
     {
@@ -43,6 +51,10 @@
         "number": [
           "M 10 15 C 25 -5 70 -5 68 22 C 66 45 40 48 30 48 C 45 48 72 52 70 75 C 68 105 20 105 8 85"
         ]
+      },
+      "audio": {
+        "name": "audio/3_name.mp3",
+        "card": "audio/3_card.mp3"
       }
     },
     {
@@ -56,6 +68,10 @@
           "M 50 0 L 5 70 L 75 70",
           "M 55 35 L 55 100"
         ]
+      },
+      "audio": {
+        "name": "audio/4_name.mp3",
+        "card": "audio/4_card.mp3"
       }
     },
     {
@@ -68,6 +84,10 @@
         "number": [
           "M 65 0 L 15 0 L 12 45 C 30 35 70 35 70 70 C 70 105 20 105 8 88"
         ]
+      },
+      "audio": {
+        "name": "audio/5_name.mp3",
+        "card": "audio/5_card.mp3"
       }
     },
     {
@@ -80,6 +100,10 @@
         "number": [
           "M 62 5 C 40 -5 10 20 10 65 C 10 105 65 105 65 70 C 65 40 20 40 12 62"
         ]
+      },
+      "audio": {
+        "name": "audio/6_name.mp3",
+        "card": "audio/6_card.mp3"
       }
     },
     {
@@ -92,6 +116,10 @@
         "number": [
           "M 5 0 L 70 0 L 28 100"
         ]
+      },
+      "audio": {
+        "name": "audio/7_name.mp3",
+        "card": "audio/7_card.mp3"
       }
     },
     {
@@ -104,6 +132,10 @@
         "number": [
           "M 60 18 C 60 -5 12 -5 12 20 C 12 45 66 50 66 75 C 66 105 8 105 8 75 C 8 50 60 45 60 18"
         ]
+      },
+      "audio": {
+        "name": "audio/8_name.mp3",
+        "card": "audio/8_card.mp3"
       }
     },
     {
@@ -116,6 +148,10 @@
         "number": [
           "M 60 22 C 58 -5 12 -5 12 22 C 12 48 58 48 60 22 L 60 100"
         ]
+      },
+      "audio": {
+        "name": "audio/9_name.mp3",
+        "card": "audio/9_card.mp3"
       }
     },
     {
@@ -129,6 +165,10 @@
           "M 15 20 L 35 0 L 35 100",
           "M 85 0 A 30 50 0 1 0 85 100 A 30 50 0 1 0 85 0"
         ]
+      },
+      "audio": {
+        "name": "audio/10_name.mp3",
+        "card": "audio/10_card.mp3"
       }
     }
   ],

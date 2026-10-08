@@ -10,7 +10,7 @@ New here? Start with **SETUP.md**.
 | --- | --- | --- |
 | 1 | App shell: Home, Letters and Numbers worlds, learn cards, Reward, parent gate | Done |
 | 2 | Responsive layouts; pack system: manifest, download, verify, unzip, offline storage (phone and web); pack builder and dev server | Done |
-| 3 | Audio: voice clips, sound effects, replay button | Built; voice clips need Azure key |
+| 3 | Audio: voice clips, sound effects, replay button | Done (free Piper voice; Azure optional) |
 | 4 | Tracing engine for capital and small letters and numbers | Done |
 | 5 | Saved progress, Pip animations, polish, Play Store release | Planned |
 
@@ -51,3 +51,5 @@ Product Plan, Content Plan, Design System, Screen Designs and Technical Design l
 
 - Pictures: Microsoft Fluent Emoji, MIT licence (`content/LICENSE-FluentEmoji.txt`).
 - Font: Baloo 2 by Ek Type, SIL Open Font License (`assets/fonts/OFL-Baloo2.txt`).
+- Voice: made with Piper (MIT licence, github.com/rhasspy/piper), voice "Cori" (en_GB-cori-high), trained on public-domain LibriVox recordings.
+- Sound effects: generated tones (`tools/sfx_gen.dart`), no third-party sounds.
