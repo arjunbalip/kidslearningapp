@@ -14,8 +14,9 @@ import 'tracer.dart';
 /// the finger, shows a gentle amber hint when needed, and plays a little
 /// celebration when the shape is finished.
 ///
-/// After 4 seconds without touching, a pink dot shows how the current
-/// stroke goes; [TraceCanvasState.showMe] shows it at once.
+/// A pink dot shows how the stroke goes as soon as the shape appears, and
+/// again after 4 seconds without touching; [TraceCanvasState.showMe] shows
+/// it at once.
 class TraceCanvas extends StatefulWidget {
   const TraceCanvas({
     super.key,
@@ -61,7 +62,8 @@ class TraceCanvasState extends State<TraceCanvas> with TickerProviderStateMixin 
   @override
   void initState() {
     super.initState();
-    _restartIdle();
+    // Show the way at once, looping until the child touches the screen.
+    showMe();
   }
 
   @override
