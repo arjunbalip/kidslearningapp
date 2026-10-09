@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
 import '../../core/audio/audio_service.dart';
+import '../../core/progress/progress.dart';
 import '../../packs/pack_manager.dart';
 import '../../packs/pack_models.dart';
 import '../../widgets/metro.dart';
@@ -23,7 +24,8 @@ class WorldScreen extends StatelessWidget {
 
   bool get _isLetters => kind == WorldKind.letters;
   String get _type => _isLetters ? 'letters' : 'numbers';
-  Color get _color => _isLetters ? AppColors.lettersBlue : AppColors.numbersGreen;
+  Color get _color =>
+      _isLetters ? AppColors.lettersBlue : AppColors.numbersGreen;
   Color get _deepColor =>
       _isLetters ? const Color(0xFF1D4ED8) : const Color(0xFF15803D);
   Color get _textColor =>
@@ -59,7 +61,8 @@ class WorldScreen extends StatelessWidget {
                   Expanded(
                     child: pack == null
                         ? const _NotDownloaded()
-                        : MetroGrid(tiles: (cols) => _tiles(context, pack, cols)),
+                        : MetroGrid(
+                            tiles: (cols) => _tiles(context, pack, cols)),
                   ),
                 ],
               );
@@ -88,7 +91,8 @@ class WorldScreen extends StatelessWidget {
                 child: FittedBox(
                   child: Text(
                     _isLetters ? 'Aa' : '123',
-                    style: baloo(120, weight: 800, color: Colors.white, height: 1),
+                    style:
+                        baloo(120, weight: 800, color: Colors.white, height: 1),
                   ),
                 ),
               ),
@@ -119,21 +123,22 @@ class WorldScreen extends StatelessWidget {
           label: 'Play',
           onTap: () => context.go('/$_type/play'),
           child: const FittedBox(
-            child: Icon(Icons.celebration_rounded, size: 150, color: Colors.white),
+            child:
+                Icon(Icons.celebration_rounded, size: 150, color: Colors.white),
           ),
         ),
       ),
-      if (_isLetters)
-        MetroTileSpec(
-          w: cols,
-          h: 1,
-          child: MetroTile(
-            color: Colors.white,
-            label: '',
-            semanticLabel: 'Letters A to Z',
-            child: _LetterChips(pack: pack),
-          ),
+      MetroTileSpec(
+        w: cols,
+        h: 1,
+        child: MetroTile(
+          color: Colors.white,
+          label: '',
+          semanticLabel: _isLetters ? 'Letters A to Z' : 'Numbers 1 to 10',
+          child:
+              _ProgressChips(pack: pack, isLetters: _isLetters, color: _color),
         ),
+      ),
     ];
   }
 
@@ -167,52 +172,83 @@ class WorldScreen extends StatelessWidget {
   }
 }
 
-/// A to Z chips that fill the progress tile; finished letters will be
-/// filled in once progress is saved.
-class _LetterChips extends StatelessWidget {
-  const _LetterChips({required this.pack});
+/// One chip per letter or number, filled in as the child traces them:
+/// outline = not yet; world colour = traced (for letters: capital or
+/// small); gold = all done (capital and small, or the number).
+class _ProgressChips extends StatelessWidget {
+  const _ProgressChips(
+      {required this.pack, required this.isLetters, required this.color});
 
   final PackData pack;
+  final bool isLetters;
+  final Color color;
+
+  /// 0 = not traced, 1 = partly, 2 = all.
+  int _level(PackItem item) {
+    final p = Progress.instance;
+    if (!isLetters) return p.isTraced('number', item.id) ? 2 : 0;
+    final done = [p.isTraced('upper', item.id), p.isTraced('lower', item.id)]
+        .where((d) => d)
+        .length;
+    return done;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, c) {
-      // Fit all chips in up to 2 rows (3 on very narrow tiles).
-      final n = pack.items.length;
-      final rows = c.maxWidth / n >= 24 ? 1 : (c.maxWidth / (n / 2) >= 22 ? 2 : 3);
-      final perRow = (n / rows).ceil();
-      final chip = ((c.maxWidth - 4.0 * (perRow - 1)) / perRow)
-          .clamp(14.0, 36.0)
-          .toDouble();
-      return FittedBox(
-        fit: BoxFit.scaleDown,
-        child: SizedBox(
-          width: c.maxWidth,
-          child: Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 4,
-          runSpacing: 4,
-          children: [
-            for (final item in pack.items)
-              Container(
-                width: chip,
-                height: chip,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.line, width: 1.5),
-                ),
-                child: Text(
-                  item.upper ?? item.id,
-                  style: baloo(chip * 0.5,
-                      weight: 700, color: AppColors.inkMuted, height: 1),
-                ),
-              ),
-          ],
+    return ListenableBuilder(
+      listenable: Progress.instance,
+      builder: (context, _) => LayoutBuilder(builder: (context, c) {
+        // Fit all chips in up to 2 rows (3 on very narrow tiles).
+        final n = pack.items.length;
+        final rows =
+            c.maxWidth / n >= 24 ? 1 : (c.maxWidth / (n / 2) >= 22 ? 2 : 3);
+        final perRow = (n / rows).ceil();
+        final chip = ((c.maxWidth - 4.0 * (perRow - 1)) / perRow)
+            .clamp(14.0, isLetters ? 36.0 : 48.0)
+            .toDouble();
+        return FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SizedBox(
+            width: c.maxWidth,
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 4,
+              runSpacing: 4,
+              children: [
+                for (final item in pack.items) _chip(item, chip),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
+  }
+
+  Widget _chip(PackItem item, double size) {
+    final level = _level(item);
+    final fill = switch (level) {
+      0 => null,
+      1 => color,
+      _ => AppColors.starYellow,
+    };
+    final text = level == 1
+        ? Colors.white
+        : (level == 2 ? AppColors.ink : AppColors.inkMuted);
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: fill,
+        border:
+            fill == null ? Border.all(color: AppColors.line, width: 1.5) : null,
+      ),
+      child: Text(
+        isLetters ? (item.upper ?? item.id) : '${item.number ?? item.id}',
+        style: baloo(size * 0.5, weight: 700, color: text, height: 1),
+      ),
+    );
   }
 }
 
@@ -237,7 +273,9 @@ class _NotDownloadedState extends State<_NotDownloaded> {
     return LayoutBuilder(builder: (context, c) {
       final portrait = c.maxHeight > c.maxWidth;
       final children = [
-        Flexible(child: Pip(height: (c.maxHeight * 0.45).clamp(80.0, 220.0).toDouble())),
+        Flexible(
+            child: Pip(
+                height: (c.maxHeight * 0.45).clamp(80.0, 220.0).toDouble())),
         const SizedBox(width: 16, height: 16),
         const Flexible(child: SpeechBubble('Ask a grown-up to download this!')),
       ];

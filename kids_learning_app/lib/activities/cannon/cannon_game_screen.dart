@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
 import '../../core/audio/audio_service.dart';
+import '../../core/progress/progress.dart';
 import '../../packs/pack_manager.dart';
 import '../../packs/pack_models.dart';
 import '../../widgets/pip.dart';
@@ -295,6 +296,7 @@ class _CannonGameScreenState extends State<CannonGameScreen>
       if (!mounted || token != _roundToken) return;
       final g = _game!;
       if (g.gameDone) {
+        Progress.instance.gameFinished();
         context.go('/reward', extra: _backTo);
         return;
       }

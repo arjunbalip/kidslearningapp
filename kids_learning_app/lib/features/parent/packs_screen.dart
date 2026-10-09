@@ -6,9 +6,11 @@ import '../../app/responsive.dart';
 import '../../app/theme.dart';
 import '../../packs/pack_manager.dart';
 import 'parent_access.dart';
+import 'progress_section.dart';
 
-/// Screen 8: the parent area's Packs page. Lists the packs on the server
-/// and what is installed; download, update, cancel and remove.
+/// Screen 8: the parent area. Progress (what the child has done, reset),
+/// then the packs on the server and what is installed; download, update,
+/// cancel and remove.
 class PacksScreen extends StatefulWidget {
   const PacksScreen({super.key});
 
@@ -73,6 +75,11 @@ class _PacksScreenState extends State<PacksScreen> {
                     child: ListView(
                       padding: EdgeInsets.all(s.pad + 4),
                       children: [
+                        Text('Progress',
+                            style: baloo(s.isTablet ? 32 : 26, weight: 700)),
+                        const SizedBox(height: 8),
+                        const ProgressSection(),
+                        const SizedBox(height: 28),
                         Text('Content packs',
                             style: baloo(s.isTablet ? 32 : 26, weight: 700)),
                         Text(

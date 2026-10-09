@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app/app.dart';
 import 'core/audio/audio_service.dart';
+import 'core/progress/progress.dart';
 import 'packs/pack_manager.dart';
 
 Future<void> main() async {
@@ -11,6 +12,7 @@ Future<void> main() async {
   // first screen, so the worlds know straight away what they can show.
   await PackManager.instance.init();
   await AudioService.instance.init();
+  await Progress.instance.load();
 
   // All screens adapt to portrait and landscape, phones and tablets,
   // so the orientation is not locked.

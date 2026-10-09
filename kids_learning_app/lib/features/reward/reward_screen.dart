@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
 import '../../core/audio/audio_service.dart';
-import '../../core/progress/stars.dart';
+import '../../core/progress/progress.dart';
 import '../../widgets/bouncy.dart';
 import '../../widgets/pip.dart';
 import '../../widgets/round_icon_button.dart';
@@ -34,7 +34,7 @@ class _RewardScreenState extends State<RewardScreen>
     // Sounds wait for the first frame too, so the screen we came from has
     // stopped its voice first.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Stars.add();
+      Progress.instance.addStar();
       AudioService.instance.effect(Sfx.jingle);
       AudioService.instance.say(Prompt.reward);
     });

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
 import '../../core/audio/audio_service.dart';
-import '../../core/progress/stars.dart';
+import '../../core/progress/progress.dart';
 import '../../packs/pack_manager.dart';
 import '../../packs/pack_models.dart';
 import '../../widgets/round_icon_button.dart';
@@ -107,7 +107,9 @@ class _TraceScreenState extends State<TraceScreen> {
         shape: _shape(items[index], index),
         color: _color,
         onDone: () {
-          Stars.add();
+          Progress.instance
+            ..addStar()
+            ..markTraced(widget.kind.key, items[index].id);
           _goTo(index + 1, count);
         },
       ),

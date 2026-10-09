@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/responsive.dart';
 import '../../app/theme.dart';
 import '../../core/audio/audio_service.dart';
-import '../../core/progress/stars.dart';
+import '../../core/progress/progress.dart';
 import '../../packs/pack_manager.dart';
 import '../../widgets/ask_grown_up.dart';
 import '../../widgets/metro.dart';
@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
             label: '',
             semanticLabel: 'Stars',
             child: ValueListenableBuilder<int>(
-              valueListenable: Stars.count,
+              valueListenable: Progress.instance.starCount,
               builder: (context, n, _) => FittedBox(
                 child: Row(
                   children: [

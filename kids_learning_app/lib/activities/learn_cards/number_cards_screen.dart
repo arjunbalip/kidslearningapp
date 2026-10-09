@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 import '../../core/audio/audio_service.dart';
+import '../../core/progress/progress.dart';
 import '../../packs/pack_manager.dart';
 import '../../packs/pack_models.dart';
 import '../../widgets/pack_image.dart';
@@ -25,7 +26,10 @@ class NumberCardsScreen extends StatelessWidget {
       initialIndex: initialIndex,
       color: AppColors.numbersGreen,
       backTo: '/numbers',
-      onShow: (i) => AudioService.instance.sayPack(pack.id, pack.items[i].audio['card']),
+      onShow: (i) {
+        AudioService.instance.sayPack(pack.id, pack.items[i].audio['card']);
+        Progress.instance.markSeen('numbers', pack.items[i].id);
+      },
       cardBuilder: (context, i) => _NumberCard(packId: pack.id, item: pack.items[i]),
     );
   }
