@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 
 import '../activities/cannon/cannon_game_screen.dart';
 import '../activities/learn_cards/letter_cards_screen.dart';
+import '../activities/memory/memory_game_screen.dart';
 import '../activities/learn_cards/number_cards_screen.dart';
 import '../activities/tracing/trace_screen.dart';
 import '../activities/tracing/trace_shape.dart';
@@ -49,6 +50,10 @@ final appRouter = GoRouter(
             GoRoute(
               path: 'play',
               builder: (context, state) => const CannonGameScreen(numbers: false),
+            ),
+            GoRoute(
+              path: 'memory',
+              builder: (context, state) => const MemoryGameScreen(),
             ),
           ],
         ),

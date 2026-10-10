@@ -20,7 +20,8 @@ enum Prompt {
   askGrownUp,
   askUpdate,
   shootInOrder,
-  tryAgain;
+  tryAgain,
+  findPairs;
 
   /// File name: traceStart -> trace_start.
   String get file =>

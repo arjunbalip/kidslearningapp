@@ -128,6 +128,19 @@ class WorldScreen extends StatelessWidget {
           ),
         ),
       ),
+      if (_isLetters)
+        MetroTileSpec(
+          w: 2,
+          h: 2,
+          child: MetroTile(
+            color: AppColors.brandOrange,
+            label: 'Memory',
+            onTap: () => context.go('/letters/memory'),
+            child: const FittedBox(
+              child: Icon(Icons.style_rounded, size: 150, color: Colors.white),
+            ),
+          ),
+        ),
       MetroTileSpec(
         w: cols,
         h: 1,
