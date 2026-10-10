@@ -8,13 +8,22 @@ enum FlipResult {
   noMatch, // second card is different: call [MemoryGame.closeOpen] after a pause
 }
 
-/// One step of difficulty: how many pairs, and whether a pair is a
-/// capital and a small letter (A and a) instead of two the same.
+/// What is on the two cards of a pair (letters; numbers always use [capital]).
+enum CardFaces {
+  capital, // A and A (or 3 and 3)
+  small, // a and a
+  mixed, // A and a: the picture is hidden, so the letter shape counts
+}
+
+/// One step of difficulty: how many pairs, and what the cards show.
 class MemoryLevel {
-  const MemoryLevel(this.pairs, {this.capitalAndSmall = false});
+  const MemoryLevel(this.pairs, {this.faces = CardFaces.capital});
 
   final int pairs;
-  final bool capitalAndSmall;
+  final CardFaces faces;
+
+  /// Card counts the settings offer: 6, 8, 12 and 16 cards.
+  static const pairChoices = [3, 4, 6, 8];
 }
 
 /// Rules of the Memory game, with no drawing.
@@ -27,9 +36,14 @@ class MemoryGame {
     final picked = (List.generate(itemCount, (i) => i)..shuffle(_random))
         .take(math.min(level.pairs, itemCount))
         .toList();
-    // Each pair: one card as it is, one card small (only used for A and a).
+    // Whether each card of a pair shows the small letter.
+    final (firstSmall, secondSmall) = switch (level.faces) {
+      CardFaces.capital => (false, false),
+      CardFaces.small => (true, true),
+      CardFaces.mixed => (false, true),
+    };
     final deck = [
-      for (final p in picked) ...[(p, false), (p, level.capitalAndSmall)],
+      for (final p in picked) ...[(p, firstSmall), (p, secondSmall)],
     ]..shuffle(_random);
     cards = [for (final c in deck) c.$1];
     small = {
@@ -43,8 +57,8 @@ class MemoryGame {
     MemoryLevel(3),
     MemoryLevel(4),
     MemoryLevel(6),
-    MemoryLevel(4, capitalAndSmall: true),
-    MemoryLevel(6, capitalAndSmall: true),
+    MemoryLevel(4, faces: CardFaces.mixed),
+    MemoryLevel(6, faces: CardFaces.mixed),
   ];
 
   /// Numbers: same number 3, 4, 6 pairs.
@@ -56,7 +70,7 @@ class MemoryGame {
   /// Pack item index on each card, in grid order.
   late final List<int> cards;
 
-  /// Cards that show the small letter (capital-and-small levels only).
+  /// Cards that show the small letter.
   late final Set<int> small;
 
   /// Cards open but not yet matched (zero, one or two).

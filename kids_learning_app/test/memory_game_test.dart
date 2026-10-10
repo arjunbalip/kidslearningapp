@@ -59,7 +59,7 @@ void main() {
   test('capital-and-small levels pair one capital with one small card', () {
     final g = MemoryGame(
         itemCount: 26,
-        level: const MemoryLevel(4, capitalAndSmall: true),
+        level: const MemoryLevel(4, faces: CardFaces.mixed),
         random: math.Random(5));
     expect(g.small.length, 4);
     for (var i = 0; i < g.cards.length; i++) {
@@ -75,5 +75,14 @@ void main() {
     final g = MemoryGame(
         itemCount: 26, level: const MemoryLevel(6), random: math.Random(6));
     expect(g.small, isEmpty);
+  });
+
+  test('small-letter pairs show the small letter on both cards', () {
+    final g = MemoryGame(
+        itemCount: 26,
+        level: const MemoryLevel(8, faces: CardFaces.small),
+        random: math.Random(8));
+    expect(g.cards.length, 16);
+    expect(g.small.length, 16);
   });
 }

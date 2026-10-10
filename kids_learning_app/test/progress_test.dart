@@ -68,4 +68,17 @@ void main() {
     expect(p.memoryLevel('letters'), 2);
     expect(p.memoryLevel('numbers'), 0);
   });
+
+  test('memory settings are saved per world and reset to Auto', () async {
+    final p = Progress.instance;
+    expect(p.memoryChoice('letters').auto, isTrue);
+    p.setMemoryChoice('letters', const MemoryChoice(auto: false, faces: 'small', pairs: 8));
+    await Future<void>.delayed(Duration.zero);
+    p.clearForTest();
+    await p.load();
+    expect(p.memoryChoice('letters'), const MemoryChoice(auto: false, faces: 'small', pairs: 8));
+    expect(p.memoryChoice('numbers').auto, isTrue);
+    await p.reset();
+    expect(p.memoryChoice('letters').auto, isTrue);
+  });
 }

@@ -15,6 +15,7 @@ import '../../widgets/round_icon_button.dart';
 import '../../widgets/top_bar.dart';
 import '../learn_cards/missing_pack_screen.dart';
 import 'memory_game.dart';
+import 'memory_settings.dart';
 
 /// Screen 9: Memory. Cards lie face down; the child opens two at a time.
 /// A pair stays open with a gold glow; two different cards wiggle in amber
@@ -73,10 +74,35 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
   int get _level =>
       Progress.instance.memoryLevel(_type).clamp(0, _levels.length - 1).toInt();
 
+  /// Auto: the level ladder. Otherwise the type and size picked in settings.
+  MemoryLevel get _currentLevel {
+    final c = Progress.instance.memoryChoice(_type);
+    if (c.auto) return _levels[_level];
+    return MemoryLevel(
+      c.pairs,
+      faces: widget.numbers
+          ? CardFaces.capital
+          : CardFaces.values.firstWhere((f) => f.name == c.faces,
+              orElse: () => CardFaces.capital),
+    );
+  }
+
+  Future<void> _openSettings() async {
+    final before = Progress.instance.memoryChoice(_type);
+    await showDialog<void>(
+      context: context,
+      builder: (context) => MemorySettingsDialog(
+          type: _type, numbers: widget.numbers, color: _color),
+    );
+    if (mounted && Progress.instance.memoryChoice(_type) != before) {
+      setState(_newDeal);
+    }
+  }
+
   void _newDeal() {
     _deal++;
     _wiggles.clear();
-    _game = MemoryGame(itemCount: _pack!.items.length, level: _levels[_level]);
+    _game = MemoryGame(itemCount: _pack!.items.length, level: _currentLevel);
   }
 
   void _refresh() => setState(_newDeal);
@@ -124,9 +150,10 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
     });
     Future.delayed(const Duration(milliseconds: 2600), () {
       if (!mounted || deal != _deal) return;
-      Progress.instance
-        ..memoryWon(_type, _levels.length - 1)
-        ..gameFinished();
+      final p = Progress.instance;
+      // Only Auto gets harder; a size picked in settings stays as it is.
+      if (p.memoryChoice(_type).auto) p.memoryWon(_type, _levels.length - 1);
+      p.gameFinished();
       context.go('/reward', extra: _backTo);
     });
   }
@@ -151,6 +178,19 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
               border: Border.all(color: AppColors.line, width: 3),
             ),
           ),
+      ],
+    );
+    // Full-size buttons in the bar; the dots get their own row, so the bar
+    // never squeezes the buttons below the child tap size.
+    final buttons = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        RoundIconButton(
+          icon: Icons.tune_rounded,
+          semanticLabel: 'Memory settings',
+          color: _color,
+          onPressed: _openSettings,
+        ),
         SizedBox(width: s.gap),
         RoundIconButton(
           icon: Icons.refresh_rounded,
@@ -174,12 +214,14 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
                   color: _color,
                   onPressed: () => context.go(_backTo),
                 ),
-                center: Semantics(
-                  label: '${_game.pairsFound} of ${_game.pairs} pairs found',
-                  child: found,
-                ),
+                center: buttons,
               ),
-              SizedBox(height: s.gap),
+              SizedBox(height: s.gap / 2),
+              Semantics(
+                label: '${_game.pairsFound} of ${_game.pairs} pairs found',
+                child: FittedBox(fit: BoxFit.scaleDown, child: found),
+              ),
+              SizedBox(height: s.gap / 2),
               Expanded(child: _grid(pack, s)),
             ],
           ),
@@ -205,6 +247,18 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
           cols = k;
         }
       }
+      var neat = 0.0;
+      for (var k = 1; k <= n; k++) {
+        if (n % k != 0) continue;
+        final rows = n ~/ k;
+        final w = math.min((c.maxWidth - gap * (k - 1)) / k,
+            (c.maxHeight - gap * (rows - 1)) / rows * aspect);
+        if (w >= best * 0.85 && w > neat) {
+          neat = w;
+          cols = k;
+        }
+      }
+      if (neat > 0) best = neat;
       final cardW = math.max(best, s.tap);
       final rows = (n / cols).ceil();
       return Center(
@@ -226,7 +280,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
                     item: pack.items[_game.cards[i]],
                     small: _game.small.contains(i),
                     // On capital-and-small levels the picture would give the pair away.
-                    showPicture: !_game.level.capitalAndSmall,
+                    showPicture: _game.level.faces != CardFaces.mixed,
                     color: _color,
                     faceUp: _game.isFaceUp(i),
                     matched: _game.matched.contains(i),
