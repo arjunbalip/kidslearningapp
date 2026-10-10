@@ -12,8 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// - seen: learn cards looked at. Shown only in the parent area, because
 ///   swiping is not the same as learning.
 /// - [gamesFinished]: games played to the end.
-/// - [memoryLevel]: Memory game level (0, 1, 2 = 3, 4, 6 pairs); goes up
-///   after each win.
+/// - memory levels: Memory game level per pack type ("letters",
+///   "numbers"); goes up after each win.
 ///
 /// Usage: `Progress.instance.addStar()`; widgets listen to it (it is a
 /// ChangeNotifier, like INotifyPropertyChanged).
@@ -26,7 +26,7 @@ class Progress extends ChangeNotifier {
 
   int _stars = 0;
   int _gamesFinished = 0;
-  int _memoryLevel = 0;
+  final Map<String, int> _memoryLevels = {};
   final Map<String, Set<String>> _traced = {};
   final Map<String, Set<String>> _seen = {};
 
@@ -35,7 +35,9 @@ class Progress extends ChangeNotifier {
 
   int get stars => _stars;
   int get gamesFinished => _gamesFinished;
-  int get memoryLevel => _memoryLevel;
+
+  /// Memory game level (index into its level list) for a pack type.
+  int memoryLevel(String type) => _memoryLevels[type] ?? 0;
 
   /// Item ids traced for a kind ("upper", "lower" or "number").
   Set<String> traced(String kind) => _traced[kind] ?? const {};
@@ -78,8 +80,9 @@ class Progress extends ChangeNotifier {
   }
 
   /// A Memory game was won: one level harder next time, up to [maxLevel].
-  void memoryWon(int maxLevel) {
-    if (_memoryLevel < maxLevel) _memoryLevel++;
+  void memoryWon(String type, int maxLevel) {
+    final now = memoryLevel(type);
+    if (now < maxLevel) _memoryLevels[type] = now + 1;
     _changed();
   }
 
@@ -87,7 +90,7 @@ class Progress extends ChangeNotifier {
   Future<void> reset() async {
     _stars = 0;
     _gamesFinished = 0;
-    _memoryLevel = 0;
+    _memoryLevels.clear();
     _traced.clear();
     _seen.clear();
     _changed();
@@ -111,7 +114,7 @@ class Progress extends ChangeNotifier {
   Map<String, dynamic> _toJson() => {
         'stars': _stars,
         'gamesFinished': _gamesFinished,
-        'memoryLevel': _memoryLevel,
+        'memoryLevels': _memoryLevels,
         'traced': {
           for (final e in _traced.entries) e.key: (e.value.toList()..sort())
         },
@@ -127,7 +130,17 @@ class Progress extends ChangeNotifier {
         };
     _stars = (j['stars'] as num?)?.toInt() ?? 0;
     _gamesFinished = (j['gamesFinished'] as num?)?.toInt() ?? 0;
-    _memoryLevel = (j['memoryLevel'] as num?)?.toInt() ?? 0;
+    _memoryLevels
+      ..clear()
+      ..addAll({
+        for (final e
+            in ((j['memoryLevels'] as Map<String, dynamic>?) ?? const {})
+                .entries)
+          e.key: (e.value as num).toInt(),
+      });
+    // Saved before levels were kept per world: that one level was for letters.
+    final old = (j['memoryLevel'] as num?)?.toInt();
+    if (old != null) _memoryLevels.putIfAbsent('letters', () => old);
     _traced
       ..clear()
       ..addAll(sets(j['traced']));
@@ -141,7 +154,7 @@ class Progress extends ChangeNotifier {
   void clearForTest() {
     _stars = 0;
     _gamesFinished = 0;
-    _memoryLevel = 0;
+    _memoryLevels.clear();
     _traced.clear();
     _seen.clear();
     starCount.value = 0;

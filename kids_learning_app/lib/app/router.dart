@@ -53,7 +53,7 @@ final appRouter = GoRouter(
             ),
             GoRoute(
               path: 'memory',
-              builder: (context, state) => const MemoryGameScreen(),
+              builder: (context, state) => const MemoryGameScreen(numbers: false),
             ),
           ],
         ),
@@ -77,6 +77,10 @@ final appRouter = GoRouter(
             GoRoute(
               path: 'play',
               builder: (context, state) => const CannonGameScreen(numbers: true),
+            ),
+            GoRoute(
+              path: 'memory',
+              builder: (context, state) => const MemoryGameScreen(numbers: true),
             ),
           ],
         ),

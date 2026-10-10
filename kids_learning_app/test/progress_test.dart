@@ -53,4 +53,19 @@ void main() {
     await Progress.instance.load();
     expect(Progress.instance.stars, 0);
   });
+
+  test('memory levels are kept per world, and old saved data still counts',
+      () async {
+    final p = Progress.instance..memoryWon('numbers', 2);
+    expect(p.memoryLevel('numbers'), 1);
+    expect(p.memoryLevel('letters'), 0);
+    await Future<void>.delayed(Duration.zero); // let that save finish first
+
+    SharedPreferences.setMockInitialValues(
+        {'progress_v1': '{"memoryLevel": 2}'});
+    p.clearForTest();
+    await p.load();
+    expect(p.memoryLevel('letters'), 2);
+    expect(p.memoryLevel('numbers'), 0);
+  });
 }

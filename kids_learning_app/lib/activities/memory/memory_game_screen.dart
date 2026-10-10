@@ -18,12 +18,16 @@ import 'memory_game.dart';
 
 /// Screen 9: Memory. Cards lie face down; the child opens two at a time.
 /// A pair stays open with a gold glow; two different cards wiggle in amber
-/// and close again after a short look. Levels: 3, 4, then 6 pairs (saved).
-/// The refresh button deals new random letters at the same level.
+/// and close again after a short look. Levels are saved per world (see
+/// [MemoryGame.letterLevels] and [MemoryGame.numberLevels]); the
+/// capital-and-small levels hide the picture, so the letter shape counts.
+/// The refresh button deals new random cards at the same level.
 class MemoryGameScreen extends StatefulWidget {
-  const MemoryGameScreen({super.key, this.pack});
+  const MemoryGameScreen({super.key, required this.numbers, this.pack});
 
-  /// For tests only; normally the installed Letters pack is used.
+  final bool numbers;
+
+  /// For tests only; normally the installed pack is used.
   final PackData? pack;
 
   @override
@@ -39,12 +43,18 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
 
   static const _lookTime =
       Duration(milliseconds: 1500); // before two different cards close
-  static const _backTo = '/letters';
+
+  String get _type => widget.numbers ? 'numbers' : 'letters';
+  String get _backTo => '/$_type';
+  Color get _color =>
+      widget.numbers ? AppColors.numbersGreen : AppColors.lettersBlue;
+  List<MemoryLevel> get _levels =>
+      widget.numbers ? MemoryGame.numberLevels : MemoryGame.letterLevels;
 
   @override
   void initState() {
     super.initState();
-    _pack = widget.pack ?? PackManager.instance.packOfType('letters');
+    _pack = widget.pack ?? PackManager.instance.packOfType(_type);
     if (_pack != null) {
       _newDeal();
       // After the first frame, so the screen we came from has stopped its voice.
@@ -60,15 +70,13 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
     super.dispose();
   }
 
-  int get _level => Progress.instance.memoryLevel
-      .clamp(0, MemoryGame.levelPairs.length - 1)
-      .toInt();
+  int get _level =>
+      Progress.instance.memoryLevel(_type).clamp(0, _levels.length - 1).toInt();
 
   void _newDeal() {
     _deal++;
     _wiggles.clear();
-    _game = MemoryGame(
-        itemCount: _pack!.items.length, pairs: MemoryGame.levelPairs[_level]);
+    _game = MemoryGame(itemCount: _pack!.items.length, level: _levels[_level]);
   }
 
   void _refresh() => setState(_newDeal);
@@ -117,7 +125,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
     Future.delayed(const Duration(milliseconds: 2600), () {
       if (!mounted || deal != _deal) return;
       Progress.instance
-        ..memoryWon(MemoryGame.levelPairs.length - 1)
+        ..memoryWon(_type, _levels.length - 1)
         ..gameFinished();
       context.go('/reward', extra: _backTo);
     });
@@ -126,7 +134,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
   @override
   Widget build(BuildContext context) {
     final pack = _pack;
-    if (pack == null) return const MissingPackScreen(backTo: _backTo);
+    if (pack == null) return MissingPackScreen(backTo: _backTo);
     final s = Screen.of(context);
 
     final found = Row(
@@ -147,7 +155,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
         RoundIconButton(
           icon: Icons.refresh_rounded,
           semanticLabel: 'New cards',
-          color: AppColors.lettersBlue,
+          color: _color,
           onPressed: _refresh,
         ),
       ],
@@ -163,7 +171,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
                 leading: RoundIconButton(
                   icon: Icons.arrow_back_rounded,
                   semanticLabel: 'Back',
-                  color: AppColors.lettersBlue,
+                  color: _color,
                   onPressed: () => context.go(_backTo),
                 ),
                 center: Semantics(
@@ -216,6 +224,10 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
                     key: ValueKey('$_deal-$i'),
                     packId: pack.id,
                     item: pack.items[_game.cards[i]],
+                    small: _game.small.contains(i),
+                    // On capital-and-small levels the picture would give the pair away.
+                    showPicture: !_game.level.capitalAndSmall,
+                    color: _color,
                     faceUp: _game.isFaceUp(i),
                     matched: _game.matched.contains(i),
                     wiggle: _wiggles[i] ?? 0,
@@ -237,6 +249,9 @@ class _MemoryCard extends StatelessWidget {
     super.key,
     required this.packId,
     required this.item,
+    required this.small,
+    required this.showPicture,
+    required this.color,
     required this.faceUp,
     required this.matched,
     required this.wiggle,
@@ -245,6 +260,9 @@ class _MemoryCard extends StatelessWidget {
 
   final String packId;
   final PackItem item;
+  final bool small;
+  final bool showPicture;
+  final Color color;
   final bool faceUp;
   final bool matched;
   final int wiggle;
@@ -252,7 +270,9 @@ class _MemoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final letter = item.upper ?? item.id;
+    final letter = item.number != null
+        ? '${item.number}'
+        : (small ? (item.lower ?? item.id) : (item.upper ?? item.id));
     return Semantics(
       button: !faceUp,
       label: faceUp ? letter : 'Card',
@@ -323,7 +343,7 @@ class _MemoryCard extends StatelessWidget {
   Widget _back() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.lettersBlue,
+        color: color,
         borderRadius: BorderRadius.circular(AppRadius.md),
       ),
       child: LayoutBuilder(builder: (context, c) {
@@ -374,11 +394,12 @@ class _MemoryCard extends StatelessWidget {
             flex: 5,
             child: FittedBox(
               child: Text(letter,
-                  style: baloo(120,
-                      weight: 800, color: AppColors.lettersBlue, height: 1)),
+                  style: baloo(120, weight: 800, color: color, height: 1)),
             ),
           ),
-          Expanded(flex: 3, child: PackImage(packId: packId, path: item.image)),
+          if (showPicture)
+            Expanded(
+                flex: 3, child: PackImage(packId: packId, path: item.image)),
         ],
       ),
     );
